@@ -13,6 +13,6 @@ public class IceWalkerAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Das ist nur ein Script zum Testen");
+        Debug.Log("Das ist nur ein Script zum Testen und kann daher ignoriert werden");
     }
 }
