@@ -68,6 +68,11 @@ public class ShamanControl : MonoBehaviour
                     rb.velocity = new Vector3(xMove, yDirect, zMove) * walkSpeed * Time.deltaTime;
                 }
             }
+            else
+            {
+                // Drops the player
+                rb.velocity += new Vector3(0.0f, -1.0f, 0.0f);
+            }
         }
     }
 
