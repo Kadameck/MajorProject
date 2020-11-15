@@ -2,27 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Player Controler (Shaman)
+/// </summary>
 public class ShamanControl : MonoBehaviour
 {
-    // The Speet multiplicator of the playeer
+    // The Speed multiplicators of the playeer
     [SerializeField]
     float walkSpeed = 500;
     [SerializeField]
+    float sneakSpeed = 150;
+    [SerializeField]
     float rotationSpeed = 10;
+
+    // Movement y value
+    private float yDirect;
 
     // The rigidbody component of the player
     private Rigidbody rb;
 
-    // Start is called before the first frame update
+    // Awake is called at the spawn of the object
     void Awake()
     {
         // Takes the rigidbody component of the player
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
+    // FixedUpdate is called regularly at a fixed interval
     void FixedUpdate()
     {
+        // Calls the Movement functon
         Movement();
     }
 
@@ -43,10 +52,22 @@ public class ShamanControl : MonoBehaviour
 
             // Calls the PlayerRotation function
             PlayerRotation(targetDir);
-            
-            // Moves the player
-            rb.velocity = new Vector3(xMove, rb.velocity.y, zMove) * walkSpeed * Time.deltaTime;
 
+            // Calls the GroundScann function to check whether there is ground under the player and, if so, in which y direction the player must move
+            if (GroundScan())
+            {
+                // Checks if the player should sneak
+                if (Sneak())
+                {
+                    // Moves the player in sneak speed
+                    rb.velocity = new Vector3(xMove, yDirect, zMove) * sneakSpeed * Time.deltaTime;
+                }
+                else
+                {
+                    // Moves the player normal speed
+                    rb.velocity = new Vector3(xMove, yDirect, zMove) * walkSpeed * Time.deltaTime;
+                }
+            }
         }
     }
 
@@ -62,5 +83,38 @@ public class ShamanControl : MonoBehaviour
             // Rotates the player smoothly so that it is looking to the movement direction
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetDir), rotationSpeed * Time.deltaTime);
         }
+    }
+
+    /// <summary>
+    /// Determines if the player should sneak
+    /// </summary>
+    /// <returns>Should sneak</returns>
+    private bool Sneak()
+    {
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Scans the area under the players position and determines if it is walkable ground
+    /// </summary>
+    /// <returns>walkability</returns>
+    private bool GroundScan()
+    {
+        RaycastHit hit;
+
+        // Checks if there is something within a distance of 1 below the player
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 2.0f))
+        {
+            // Calculates the y direction value of the movement on the current ground
+            yDirect = Vector3.Cross(hit.normal, transform.TransformDirection(Vector3.left)).y;
+            return true;
+        }
+
+        return false;
     }
 }
