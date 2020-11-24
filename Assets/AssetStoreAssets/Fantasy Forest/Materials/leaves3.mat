@@ -41,10 +41,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Cutoff: 0.3
-    - _Shininess: 0.9390114
+    - _Shininess: 1
     - _SquashAmount: 1
     m_Colors:
-    - _Color: {r: 0.15181662, g: 0.19852942, b: 0.16373643, a: 1}
+    - _Color: {r: 0, g: 1, b: 0, a: 1}
     - _Scale: {r: 1, g: 1, b: 1, a: 1}
     - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _TreeInstanceScale: {r: 1, g: 1, b: 1, a: 1}

@@ -46,7 +46,7 @@ Material:
     - _SquashAmount: 1
     - _TranslucencyViewDependency: 0.7
     m_Colors:
-    - _Color: {r: 0.22394033, g: 0.2794118, b: 0.22661828, a: 1}
+    - _Color: {r: 0.18222678, g: 0.6132076, b: 0.2130111, a: 1}
     - _Scale: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _TranslucencyColor: {r: 0.73, g: 0.85, b: 0.41, a: 1}
