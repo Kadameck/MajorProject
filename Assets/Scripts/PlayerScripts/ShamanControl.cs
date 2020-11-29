@@ -14,7 +14,12 @@ public class ShamanControl : MonoBehaviour
     float sneakSpeed = 150;
     [SerializeField]
     float rotationSpeed = 10;
-
+    [Space (10)]
+    [SerializeField]
+    GameObject hand;
+    [SerializeField]
+    GameObject magicEffect;
+    
     // Movement y value
     private float yDirect;
 
@@ -33,6 +38,7 @@ public class ShamanControl : MonoBehaviour
     {
         // Calls the Movement functon
         Movement();
+        UseMagic();
     }
 
     /// <summary>
@@ -103,6 +109,43 @@ public class ShamanControl : MonoBehaviour
 
         return false;
     }
+
+    /// <summary>
+    /// Use the magic skill
+    /// </summary>
+    private void UseMagic()
+    {
+        // Checks if the player makes a left Click
+        if(Input.GetMouseButtonDown(0))
+        {
+            // Legt einen vektor an der die angeklickte position beinhalten wird
+            Vector3 targetPosition = Vector3.zero;
+
+            // erzeugt einen raus ausgehend von der camera zur euf die welt gemappten position auf die geklickt wurde
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            // Schießt den raycast und nimmt die 3D koordinaten wo geklickt wurde
+            if (Physics.Raycast(ray, out hit))
+            {
+                targetPosition = hit.point;
+
+                if (Vector3.Distance(transform.position, targetPosition) < 10)
+                {
+                    // Spawned den effekt
+                    GameObject magic = Instantiate(magicEffect, hand.transform.position, Quaternion.identity);
+                    magic.GetComponent<MagicSkill>().Fly(hand.transform.position, targetPosition); ;
+                    
+                }
+            }
+        }
+    }
+
+
+
+
+
+
 
     /// <summary>
     /// Scans the area under the players position and determines if it is walkable ground
