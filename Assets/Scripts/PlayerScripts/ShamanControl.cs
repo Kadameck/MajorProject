@@ -135,7 +135,7 @@ public class ShamanControl : MonoBehaviour
 
                 if (Vector3.Distance(transform.position, targetPosition) < 10)
                 {
-                    activeSkillMode = true;
+                   // activeSkillMode = true;
                     // Spawned den effekt
                     GameObject magic = Instantiate(magicEffect, hand.transform.position, Quaternion.identity);
                     magic.GetComponent<MagicSkill>().Fly(hand.transform.position, targetPosition); ;
