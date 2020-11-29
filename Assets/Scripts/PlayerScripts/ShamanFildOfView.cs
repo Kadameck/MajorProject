@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/****************************************************************************************************************************
+ *                                                                                                                          *
+ * Some parts of this script are from Sebastian Lague and were taken from the following tutorial playlist:                  *
+ * https://www.youtube.com/watch?v=rQG9aUWarwE&list=PLFt_AvWsXl0dohbtVgHDNmgZV_UY7xZv7                                      *
+ * Last accessed: 28.11.2020                                                                                                *
+ *                                                                                                                          *
+ * **************************************************************************************************************************/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +17,9 @@ public class ShamanFildOfView : MonoBehaviour
     [Tooltip("The angle of the fild of view")]
     [Range(0.0f, 360.0f)]
     public float viewAngle;
-
+    [Tooltip("The PointLight that visualize the players field of view")]
+    public Light pointLight;
+    
     public LayerMask targetMask;
     public LayerMask obstacleMask;
     [Space(10)]
@@ -26,6 +36,10 @@ public class ShamanFildOfView : MonoBehaviour
     private List<Transform> visibleTargetsList = new List<Transform>();
     private Mesh viewAreaMesh;
 
+    private ShamanControl sControl;
+    private float normalViewRadius;
+    private float normalPointLightRange;
+
      private void Start()
      {
         // Creates a new mesh
@@ -35,8 +49,13 @@ public class ShamanFildOfView : MonoBehaviour
         // Sets the new mesh as the mesh of the mesh filter
         viewAreaMeshFilter.mesh = viewAreaMesh;
 
+        sControl = GetComponent<ShamanControl>();
+
+        normalViewRadius = viewRadius;
+        normalPointLightRange = pointLight.range;
+
          //StartCoroutine("FindTargetsWithDelay", 0.2f);
-     }
+    }
     //
     // IEnumerator FindTargetsWithDelay(float delay)
     // {
@@ -237,6 +256,21 @@ public class ShamanFildOfView : MonoBehaviour
 
         // Stores the shooting result of the ray
         RaycastHit rayHit;
+
+        // Wenn schleichen und aktiver noch nicht der verringerte ist
+        if(sControl.Sneak() && viewRadius != normalViewRadius * 0.5f)
+        {
+            // aktiver radius wird verringert
+            viewRadius = normalViewRadius * 0.5f;
+            pointLight.range = normalPointLightRange * 0.5f;
+        }
+        // wenn sneak false und der aktive radius verkleinert ist
+        else if(!sControl.Sneak() && viewRadius != normalViewRadius)
+        {
+            // aktiver radius soll normalisirt werden
+            viewRadius = normalViewRadius;
+            pointLight.range = normalPointLightRange;
+        }
 
         // Shoots the ray and checks if something is hiten
         if(Physics.Raycast(transform.position, dir, out rayHit, viewRadius, obstacleMask))

@@ -94,7 +94,7 @@ public class ShamanControl : MonoBehaviour
     /// Determines if the player should sneak
     /// </summary>
     /// <returns>Should sneak</returns>
-    private bool Sneak()
+    public bool Sneak()
     {
         if(Input.GetKey(KeyCode.LeftShift))
         {
