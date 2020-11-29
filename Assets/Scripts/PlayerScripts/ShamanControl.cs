@@ -19,12 +19,15 @@ public class ShamanControl : MonoBehaviour
     GameObject hand;
     [SerializeField]
     GameObject magicEffect;
-    
+
+    private bool activeSkillMode = false;
+
     // Movement y value
     private float yDirect;
 
     // The rigidbody component of the player
     private Rigidbody rb;
+
 
     // Awake is called at the spawn of the object
     void Awake()
@@ -132,6 +135,7 @@ public class ShamanControl : MonoBehaviour
 
                 if (Vector3.Distance(transform.position, targetPosition) < 10)
                 {
+                    activeSkillMode = true;
                     // Spawned den effekt
                     GameObject magic = Instantiate(magicEffect, hand.transform.position, Quaternion.identity);
                     magic.GetComponent<MagicSkill>().Fly(hand.transform.position, targetPosition); ;
