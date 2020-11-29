@@ -53,20 +53,8 @@ public class ShamanFildOfView : MonoBehaviour
 
         normalViewRadius = viewRadius;
         normalPointLightRange = pointLight.range;
-
-         //StartCoroutine("FindTargetsWithDelay", 0.2f);
     }
-    //
-    // IEnumerator FindTargetsWithDelay(float delay)
-    // {
-    //     while(true)
-    //     {
-    //         yield return new WaitForSeconds(delay);
-    //         ResetVisibleTargets();
-    //         FindVisibleTargets();
-    //         ShowVisibleTargets();
-    //     }
-    // }
+
     private void FixedUpdate()
     {
         ResetVisibleTargets();
@@ -257,17 +245,17 @@ public class ShamanFildOfView : MonoBehaviour
         // Stores the shooting result of the ray
         RaycastHit rayHit;
 
-        // Wenn schleichen und aktiver noch nicht der verringerte ist
-        if(sControl.Sneak() && viewRadius != normalViewRadius * 0.5f)
+        // Checks whether the player wants to sneak but his field of view has not yet been reduced
+        if (sControl.Sneak() && viewRadius != normalViewRadius * 0.5f)
         {
-            // aktiver radius wird verringert
+            // Reduce field of view and the pointlight radius
             viewRadius = normalViewRadius * 0.5f;
             pointLight.range = normalPointLightRange * 0.5f;
         }
-        // wenn sneak false und der aktive radius verkleinert ist
-        else if(!sControl.Sneak() && viewRadius != normalViewRadius)
+        // Checks whether the player wants to walk normally but his field of view is still reduced
+        else if (!sControl.Sneak() && viewRadius != normalViewRadius)
         {
-            // aktiver radius soll normalisirt werden
+            // Resets the field of view radius and point light radius to their normal values
             viewRadius = normalViewRadius;
             pointLight.range = normalPointLightRange;
         }
