@@ -13,7 +13,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -51,7 +51,7 @@ Material:
     - _1: 0.8
     - _2: 0.7
     - _ChromaticAberration: 0
-    - _CoastOpacity: 0.285
+    - _CoastOpacity: 0.262
     - _CoastalWavesDensity: 0.5
     - _DepthDistance: 1.5
     - _DepthFade: 1
@@ -61,15 +61,15 @@ Material:
     - _Float1: 0
     - _Float2: 0.1
     - _Float3: 0
-    - _FoamContrast: 0
-    - _FoamDensity: 0.169
-    - _FoamDistance: 0.24
+    - _FoamContrast: 0.088
+    - _FoamDensity: 0.235
+    - _FoamDistance: 0.25
     - _FoamOpacity: 1
     - _Normal: 0.15
     - _Opacity: 1
     - _Power: 0.2
     - _RefractionIntensity: 0.15
-    - _RefractionScale: 0
+    - _RefractionScale: 0.292
     - _Scale: 50
     - _Smoothness: 0.592
     - _TransAmbient: 0.2
@@ -80,8 +80,8 @@ Material:
     - _Translucency: 0
     - _UDepthDistance: 0.3
     - _UDistancePower: 0.1
-    - _WavesNormalIntensity: 0.35
-    - _WavesSpeed: 0.148
+    - _WavesNormalIntensity: 0.136
+    - _WavesSpeed: 0.102
     - _WavesTile: 0.01
     - __dirty: 0
     m_Colors:
