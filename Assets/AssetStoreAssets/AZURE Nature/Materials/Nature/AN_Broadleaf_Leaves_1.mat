@@ -108,14 +108,14 @@ Material:
     - _COLOR2: 1
     - _Color2: 0
     - _Color2Enable: 1
-    - _Color2Fade: -0.145
+    - _Color2Fade: 0.486
     - _Color2Int: 0.15
     - _Color2Intensity: 0.1
     - _Color2Level: -8.07
     - _Color2OverlayType: 0
     - _Color2Power: 0.975
     - _Color2__________: 0
-    - _Cutoff: 0.088
+    - _Cutoff: 0.243
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnableColor2: 1
@@ -130,10 +130,10 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SNOW: 0
-    - _Smoothness: 0.19
+    - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _Snow: 0
-    - _SnowAmount: 0.577
+    - _SnowAmount: 0.363
     - _SnowFade: 0.1
     - _SnowLevel: 0.5
     - _SnowOverlayType: 0
@@ -159,8 +159,8 @@ Material:
     - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1: {r: 1, g: 1, b: 1, a: 0}
-    - _Color2: {r: 0, g: 1, b: 0.25355005, a: 0}
+    - _Color1: {r: 0.035387706, g: 0.754717, b: 0, a: 0}
+    - _Color2: {r: 0.45089468, g: 0.3820755, b: 1, a: 0}
     - _CoverageColor: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _SnowColor: {r: 1, g: 1, b: 1, a: 0}

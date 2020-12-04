@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1983994674021573044}
   - component: {fileID: 7877030781472867585}
   m_Layer: 0
-  m_Name: Spot Light
+  m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,8 +43,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.124938264, g: 0, b: 0.9607843, a: 1}
-  m_Intensity: 10
-  m_Range: 11
+  m_Intensity: 5
+  m_Range: 7.5799103
   m_SpotAngle: 55
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
