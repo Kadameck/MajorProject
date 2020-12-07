@@ -15,7 +15,7 @@
 
             Stencil
         {
-            Ref 1
+            Ref 10
             Pass replace
         }
         LOD 200

@@ -14,7 +14,7 @@
 
         Stencil
         {
-            Ref 1
+            Ref 10
             Comp equal
         }
 
