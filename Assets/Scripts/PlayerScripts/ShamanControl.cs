@@ -34,15 +34,20 @@ public class ShamanControl : MonoBehaviour
     // FixedUpdate is called regularly at a fixed interval
     void FixedUpdate()
     {
-        // Calls the Movement functon
-        Movement();
+        if (!UseMagic())
+        {
+            // Calls the Movement functon
+            Movement();
+        }
     }
+
 
     /// <summary>
     /// Controlls the player movement
     /// </summary>
     private void Movement()
     {
+        // Checks if the normal Movement should be executed or if the player is climbing
         if (!isClimbing)
         {
             // Checks if the player wants to move
@@ -93,6 +98,18 @@ public class ShamanControl : MonoBehaviour
         {
             // Rotates the player smoothly so that it is looking to the movement direction
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetDir), rotationSpeed * Time.deltaTime);
+        }
+    }
+
+    public bool UseMagic()
+    {
+        if(Input.GetMouseButton(1))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
