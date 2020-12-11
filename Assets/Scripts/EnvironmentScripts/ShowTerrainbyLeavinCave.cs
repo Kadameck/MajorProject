@@ -2,14 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Ensures that the terrain will be set to invisible when entering a cave and visible when leaving a cave
-/// </summary>
-public class HideTerrainInCaves : MonoBehaviour
+public class ShowTerrainbyLeavinCave : MonoBehaviour
 {
-    [Tooltip("Other Objects that should disapear")]
-    public GameObject[] otherObjects;
-
+    private HideTerrainInCaves hTIC;
     // The Terrain taht should be enabled/disabled
     private Terrain terrain;
 
@@ -18,6 +13,7 @@ public class HideTerrainInCaves : MonoBehaviour
     {
         // Finds the terrain
         terrain = FindObjectOfType<Terrain>();
+        hTIC = FindObjectOfType<HideTerrainInCaves>();
     }
 
     /// <summary>
@@ -27,7 +23,7 @@ public class HideTerrainInCaves : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Checks if it is the player that is entering the Trigger
-        if(other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             // Calls the Coroutine that will be disable or enable the Terrain
             StartCoroutine(ChangeTerrainVisibility());
@@ -44,11 +40,11 @@ public class HideTerrainInCaves : MonoBehaviour
         yield return new WaitForFixedUpdate();
 
         // Disable or enable the terrain
-        terrain.enabled = false;
+        terrain.enabled = true;
 
-        foreach (GameObject g in otherObjects)
+        foreach(GameObject g in hTIC.otherObjects)
         {
-            g.SetActive(false);
+            g.SetActive(true);
         }
     }
 }
