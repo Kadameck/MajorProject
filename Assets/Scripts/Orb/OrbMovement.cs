@@ -12,6 +12,7 @@ public class OrbMovement : MonoBehaviour
 
     private Transform orbTrans;
     private Transform playerTrans;
+    private Rigidbody rb;
     private int iterator = 0;
     
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class OrbMovement : MonoBehaviour
     {
         orbTrans = GameObject.FindGameObjectWithTag("Orb").transform;
         playerTrans = GameObject.FindGameObjectWithTag("Player").transform;
+        rb = orbTrans.gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
