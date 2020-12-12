@@ -55,7 +55,6 @@ public class LightStone : MonoBehaviour
         lRend.colorGradient = gradient;
 
     }
-
     private void UpgradeStartAndTarget()
     {
         if(lRend.GetPosition(0) != beamStart.position || lRend.GetPosition(1) != beamTarget.position)

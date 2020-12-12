@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 622789004539013420}
   - component: {fileID: 8275463349573804876}
   - component: {fileID: 8313451792738791131}
+  - component: {fileID: 9136823393723505914}
   m_Layer: 0
   m_Name: MagicPlaceholder
   m_TagString: BasicMagic
@@ -94,3 +95,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2c5c25ca61b754589dd2169028452d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &9136823393723505914
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6616624893086511935}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6318054, y: 0.75299263, z: 0.617836}
+  m_Center: {x: 0.0023345947, y: 0.0023298264, z: -0.0046577454}
