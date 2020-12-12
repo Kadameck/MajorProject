@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestTrigger : MonoBehaviour
+public class LightStoneTrigger : MonoBehaviour
 {
+    private LightStone ls;
+
+    private void Start()
+    {
+        ls = GetComponent<LightStone>();
+    }
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("BasicMagic"))
         {
-            Debug.Log("Passt");
+            ls.ChangeLineActiveState();
         }
     }
 }

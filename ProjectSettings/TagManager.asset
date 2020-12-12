@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Orb
   - BasicMagic
+  - MagicInteractive
   layers:
   - Default
   - TransparentFX
