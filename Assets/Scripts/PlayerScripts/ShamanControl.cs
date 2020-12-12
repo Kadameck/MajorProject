@@ -14,6 +14,12 @@ public class ShamanControl : MonoBehaviour
     float sneakSpeed = 150;
     [SerializeField]
     float rotationSpeed = 10;
+    [SerializeField]
+    Renderer SUAVisualisation;
+    [SerializeField]
+    GameObject magicBall;
+    [SerializeField]
+    Transform hand;
 
     [HideInInspector]
     public bool isClimbing = false;
@@ -23,6 +29,10 @@ public class ShamanControl : MonoBehaviour
 
     // The rigidbody component of the player
     private Rigidbody rb;
+
+    private bool canUsebasicMagic = true;
+    private bool useMagic = false;
+    private GameObject currentMagicBall;
 
     // Awake is called at the spawn of the object
     void Awake()
@@ -34,11 +44,8 @@ public class ShamanControl : MonoBehaviour
     // FixedUpdate is called regularly at a fixed interval
     void FixedUpdate()
     {
-        if (!UseMagic())
-        {
-            // Calls the Movement functon
-            Movement();
-        }
+        UseMagic();
+        Movement();
     }
 
 
@@ -101,15 +108,66 @@ public class ShamanControl : MonoBehaviour
         }
     }
 
-    public bool UseMagic()
+    /// <summary>
+    /// Activates the Basic Magic Skill
+    /// </summary>
+    public void UseMagic()
     {
-        if(Input.GetMouseButton(1))
+        // Checks if the player does a left click and the basic Magic skill doesn't have a cooldown currently
+        if (Input.GetMouseButtonDown(0) && canUsebasicMagic)
         {
-            return true;
+            // Checks whether the magic skill is already activated
+            if (!useMagic)
+            {
+                // Makes the usable area visualization enabled
+                StartCoroutine(ActivateSkillUseArea());
+
+                // Spawns a magic ball effekt and set is a child of the hand of the player
+                currentMagicBall = Instantiate(magicBall, hand.position, Quaternion.identity);
+                currentMagicBall.transform.SetParent(hand);
+                // Works against a Unity Bug that causes that Instantiate is called twice sometimes.
+                CheckForSpawningBug();
+            }
+            else
+            {
+                Vector3 clickPos = Vector3.zero;
+                
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if(Physics.Raycast(ray, out hit))
+                {
+                    clickPos = hit.point;
+
+                    // Distance between the point in world space where the player has clicked on and the player itself
+                    float dist = Vector3.Distance(transform.position, clickPos);
+                    // Checks if the clicked point is in the magic usable area and if itwas a click on te terrain
+                    if (dist <= 10 && hit.collider.gameObject.CompareTag("Ground"))
+                    {
+                        // Starts the basic magic ball behaviour
+                        currentMagicBall.GetComponent<BasicMagicBehaviour>().Throw(transform.position, hit.point, dist);
+                        currentMagicBall = null;
+
+                        // Resets everything to no "magic not active"
+                        useMagic = false;
+                        SUAVisualisation.enabled = false;
+                        canUsebasicMagic = false;
+
+                        // Starts a magic usable cooldown
+                        StartCoroutine(BasicMagicCooldown());
+                    }
+                }
+            }
         }
-        else
+        // Checks if the player is doing a rightclick during the basic magic skill is active
+        else if (useMagic &&  Input.GetMouseButtonDown(1))
         {
-            return false;
+            // Resets everything to no "magic not active"
+            useMagic = false;
+            SUAVisualisation.enabled = false;
+
+            // Destry the unused magic ball
+            Destroy(currentMagicBall);
         }
     }
 
@@ -144,5 +202,58 @@ public class ShamanControl : MonoBehaviour
         }
 
         return false;
+    }
+    public bool GetUseMagic()
+    {
+        return useMagic;
+    }
+
+    /// <summary>
+    /// Makes the skill use Area visible at end of frame
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator ActivateSkillUseArea()
+    {
+        yield return new WaitForEndOfFrame();
+        useMagic = true;
+        SUAVisualisation.enabled = true;
+    }
+
+    /// <summary>
+    /// Gives the basic magic skill a cooldown time
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator BasicMagicCooldown()
+    {
+        yield return new WaitForSeconds(2);
+        canUsebasicMagic = true;
+    }
+
+    /// <summary>
+    /// Works against a Unity Bug that causes that Instantiate is called twice sometimes.
+    /// Destroy all unnecessary Basic Magic Balls
+    /// </summary>
+    private void CheckForSpawningBug()
+    {
+        // Checks if there are more than one basic magic ball
+        GameObject[] basicMagicBalls = GameObject.FindGameObjectsWithTag("BasicMagic");
+
+        // id there is more than one ball...
+        if(basicMagicBalls.Length > 1)
+        {
+            // Iterator for the balls
+            int count = 0;
+
+            // Loops through every ball
+            foreach (GameObject ball in basicMagicBalls)
+            {
+                // Destroys one of the 2 (by the bug) spawned balls
+                if (count == 0)
+                { 
+                    Destroy(ball);
+                }
+                count = 1;
+            }
+        }
     }
 }

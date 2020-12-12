@@ -8,6 +8,7 @@ TagManager:
   - TerrainHolder
   - Enemy
   - Orb
+  - BasicMagic
   layers:
   - Default
   - TransparentFX
