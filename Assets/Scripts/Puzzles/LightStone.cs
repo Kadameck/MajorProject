@@ -8,13 +8,11 @@ using UnityEngine;
 public class LightStone : MonoBehaviour
 {
     [SerializeField, Tooltip("Waht should be the start state of this light stone?")]
-    bool isActive = false;
+    bool isActive;
     [SerializeField, Tooltip("Should the line update when the start or end point moves?")]
-    bool trackMovement = false;   
+    bool trackRotation = false;   
     [SerializeField, Tooltip("Set here the start transfom of the lightbeam \n If you leave this field empty, the position of the object that this script attached will be used")]
     Transform beamStart;
-    [SerializeField, Tooltip("Set here the targets transform of the lightbeam")]
-    Transform beamTarget;
     [SerializeField, Tooltip("Material used for the lightBeam")]
     Material beamMaterial;
     [SerializeField, Tooltip("Color used near the startpoint")]
@@ -30,22 +28,28 @@ public class LightStone : MonoBehaviour
 
     // LineRenderer Component of this Object
     private LineRenderer lRend;
+    // Color gradiant of the lightbeam
+    private Gradient gradient;
     // Default initialized stat
     private bool isInitialized = false;
     // Material used by this Object
     private Material mat;
     // default emission value
-    private float emission = -10;
+    private float emission = 10;
     // Player Object
     private GameObject player;
+
+    private GameObject currentTargetPrisma;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Sets its own position as default start
         if(beamStart == null)
         {
             beamStart = this.gameObject.transform;
         }
+
         // Add and get the Linerenderer Component of the Lightstone and sets it to disabled fpr the start
         this.gameObject.AddComponent<LineRenderer>();
         lRend = GetComponent<LineRenderer>();
@@ -63,7 +67,8 @@ public class LightStone : MonoBehaviour
         {
             // Initialize the lineRenderer and sets its start and target point
             InitializeLine();
-            UpgradeStartAndTarget();
+            //UpgradeStartAndTarget();
+            RaycastShot();
         }
     }
 
@@ -89,13 +94,13 @@ public class LightStone : MonoBehaviour
         if(lRend.enabled && !isInitialized)
         {
             InitializeLine();
-            UpgradeStartAndTarget();
+            RaycastShot();
         }
 
         // Upgrades the start and/or target position of the line if it is nessesery
-        if(trackMovement && lRend.enabled)
+        if(trackRotation && lRend.enabled)
         {
-            UpgradeStartAndTarget();
+            RaycastShot();
         }
     }
 
@@ -110,12 +115,14 @@ public class LightStone : MonoBehaviour
         lRend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         lRend.material = new Material(beamMaterial);
 
+        lRend.SetPosition(0, beamStart.position);
+
         // Sets the color of the line (start and target point)
-        Gradient gradient = new Gradient();
+        gradient = new Gradient();
         gradient.SetKeys(new GradientColorKey[] { new GradientColorKey(startColor, 0.0f), new GradientColorKey(endColor, 1.0f) },
                          new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) });
         lRend.colorGradient = gradient;
-
+        lRend.enabled = true;
         // Sets the linerenderer as initialized so that this funktion is just called once
         isInitialized = true;
     }
@@ -132,30 +139,22 @@ public class LightStone : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the start and target point of the LineRenderer
-    /// </summary>
-    private void UpgradeStartAndTarget()
-    {
-        // Checks if the start and target positions has changed 
-        if(lRend.GetPosition(0) != beamStart.position || lRend.GetPosition(1) != beamTarget.position)
-        {
-            // Sets the number of points the lineRenderer should conect to two
-            lRend.positionCount = 2;
-
-            // Sets the start and target positions for the 2 given points that the lineRenderer should conect
-            lRend.SetPosition(0, beamStart.position);
-            lRend.SetPosition(1, beamTarget.position);
-        }
-    }
-
-    /// <summary>
     /// Controlls the emission value of the material
     /// </summary>
     /// <param name="dist">x-axis value of the lightEmissionByPlayerDistance-Curve</param>
     private void MaterialShininess(float dist)
     {
-        // Takes the y-axis value from the curve at the position of the given x-axis value
-        emission = lightEmissionByPlayerDistance.Evaluate(dist);
+        if(isActive)
+        {
+            emission = 10;
+        }
+        else
+        {
+            // Takes the y-axis value from the curve at the position of the given x-axis value
+            emission = -dist * 0.5f; //lightEmissionByPlayerDistance.Evaluate(dist);
+        }
+
+        Debug.Log(emission);
         // Sets the material emission value
         mat.SetColor("_EmissionColor", Color.blue * emission);
     }
@@ -167,18 +166,48 @@ public class LightStone : MonoBehaviour
     {
         // gets the distance
         float dist = Vector3.Distance(transform.position, player.transform.position);
-
+   
         // Checks whether the distance is less than the y-axis value of the specified curve
-        if (dist <= lightEmissionByPlayerDistance.keys[lightEmissionByPlayerDistance.keys.Length-1].time)
+       // if (dist <= lightEmissionByPlayerDistance.keys[lightEmissionByPlayerDistance.keys.Length-1].time)
+        if(dist<=20)
         {
             // Calls the MaterialShininess funktion with the current distance
             MaterialShininess(dist);
         }
         // If the players is to far but the light stone is still glowing...
         else if(emission != -10)
-        {
+      {
             // Calls the MaterialShininess Funktion with the y-axis value of the last Key in the curve
-            MaterialShininess(lightEmissionByPlayerDistance.keys[lightEmissionByPlayerDistance.keys.Length - 1].time);
+            MaterialShininess(20);// lightEmissionByPlayerDistance.keys[lightEmissionByPlayerDistance.keys.Length - 1].time);
+      }
+    }
+
+    private void RaycastShot()
+    {
+        RaycastHit hit;
+        //Debug.DrawLine(transform.position, transform.position + (transform.TransformDirection(Vector3.forward) * 2000), Color.red, float.PositiveInfinity);
+        
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, int.MaxValue))
+        {
+            lRend.SetPosition(1, hit.point);
+
+            if(hit.collider.gameObject.CompareTag("Prisma"))
+            {
+                if(currentTargetPrisma == null)
+                {
+                    currentTargetPrisma = hit.collider.gameObject;
+                    currentTargetPrisma.GetComponent<Prisma>().PrismaLight(gradient, widthCurve, beamMaterial);
+                }
+
+            }
+            else
+            {
+                if(currentTargetPrisma != null)
+                {
+                    currentTargetPrisma.GetComponent<Prisma>().PrismaLight(gradient, widthCurve, beamMaterial);
+                    currentTargetPrisma = null;
+                }
+            }
         }
     }
 }

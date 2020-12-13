@@ -10,6 +10,7 @@ TagManager:
   - Orb
   - BasicMagic
   - MagicInteractive
+  - Prisma
   layers:
   - Default
   - TransparentFX
