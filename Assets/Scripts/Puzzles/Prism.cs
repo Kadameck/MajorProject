@@ -19,9 +19,12 @@ public class Prism : MonoBehaviour
     
     /// <summary>
     /// Creates a LineRenderer and make it disabled
+    /// Gives this Object also the Prisma tag
     /// </summary>
     private void Awake()
     {
+        this.gameObject.tag = "Prisma";
+
         lRend = this.gameObject.AddComponent<LineRenderer>();
         lRend.enabled = false;
 

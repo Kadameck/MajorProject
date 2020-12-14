@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3851688498383571309}
   - component: {fileID: 3851688498383571308}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: NightDirectionalLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3851688498383571311}
-  m_LocalRotation: {x: 0.3029107, y: -0.51398385, z: 0.57031167, w: 0.56463295}
+  m_LocalRotation: {x: 0.3029099, y: -0.5139861, z: 0.5703137, w: 0.5646292}
   m_LocalPosition: {x: 275.8, y: 3, z: 362.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -43,7 +43,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.3757714, g: 0.3254717, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
