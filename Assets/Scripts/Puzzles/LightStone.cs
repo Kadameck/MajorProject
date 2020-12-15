@@ -10,7 +10,7 @@ public class LightStone : MonoBehaviour
     [SerializeField, Tooltip("Waht should be the start state of this light stone?")]
     bool isActive;
     [SerializeField, Tooltip("When activ, the light beam will no longer change during runtime. Only useful if neither the light source nor the target move or rotate in any way")]
-    bool staticLightBeam = false;
+    bool dynamicLightBeam = false;
     [SerializeField, Range(1, 20), Tooltip("At what distance should the stone start to emit light based on the distance of the player (in the deactivated state)")]
     int lightEffektRange = 20;
     [Space (10)]
@@ -104,7 +104,7 @@ public class LightStone : MonoBehaviour
         }
 
         // Upgrades the target position of the line if it is nessesery
-        if(!staticLightBeam && lRend.enabled)
+        if(dynamicLightBeam && lRend.enabled)
         {
             UpgradeStartPosition();
             //  RaycastShot();

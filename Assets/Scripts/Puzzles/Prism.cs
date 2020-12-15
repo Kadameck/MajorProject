@@ -16,7 +16,8 @@ public class Prism : MonoBehaviour
     private LineRenderer lRend;
     // The other Prism that is aktive just because of this prism
     private GameObject currentTargetPrism;
-    
+
+    private GameObject currentTargetMechanism;
     /// <summary>
     /// Creates a LineRenderer and make it disabled
     /// Gives this Object also the Prisma tag
@@ -163,6 +164,23 @@ public class Prism : MonoBehaviour
                     currentTargetPrism.GetComponent<Prism>().SetPrismDeactive();
                     // Resets the currentlytargetetPrism to null
                     currentTargetPrism = null;
+                }
+
+                if (hit.collider.gameObject.CompareTag("Mechanism"))
+                {
+                    if (currentTargetMechanism == null)
+                    {
+                        currentTargetMechanism = hit.collider.gameObject;
+                        currentTargetMechanism.GetComponent<StonePortalMechanism>().CheckNumberOfLightbeams(this.gameObject, true);
+                    }
+                }
+                else
+                {
+                    if (currentTargetMechanism != null)
+                    {
+                        currentTargetMechanism.GetComponent<StonePortalMechanism>().CheckNumberOfLightbeams(this.gameObject, false);
+                        currentTargetMechanism = null;
+                    }
                 }
             }
         }

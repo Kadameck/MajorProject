@@ -94,10 +94,10 @@ Material:
     - _COLOR2: 0
     - _Color2: 0
     - _Color2Enable: 1
-    - _Color2Fade: 0.227
+    - _Color2Fade: 0.175
     - _Color2Int: 0.36
     - _Color2Intensity: 1
-    - _Color2Level: -7.5
+    - _Color2Level: -8.54
     - _Color2OverlayType: 0
     - _Color2Power: -4.82
     - _Color2Type: 0
@@ -119,31 +119,31 @@ Material:
     - _Smoothness: 0.408
     - _SmoothnessTextureChannel: 0
     - _Snow: 0
-    - _SnowAmount: 0.126
-    - _SnowFade: 0.217
+    - _SnowAmount: 0
+    - _SnowFade: 0.015
     - _SnowLevel: 0
     - _SnowOverlayType: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TransAmbient: 0.354
-    - _TransDirect: 0.432
-    - _TransNormalDistortion: 0.024
-    - _TransScattering: 8.1
-    - _TransShadow: 0.398
-    - _Translucency: 2.4
+    - _TransAmbient: 0.252
+    - _TransDirect: 0.209
+    - _TransNormalDistortion: 0.257
+    - _TransScattering: 8.8
+    - _TransShadow: 0
+    - _Translucency: 26.7
     - _TreeType: 0
     - _UVSec: 0
     - _WIND: 1
     - _Wind: 1
-    - _WindForce: 0.142
-    - _WindSpeed: 0.508
-    - _WindWavesScale: 0.346
+    - _WindForce: 0.379
+    - _WindSpeed: 0.452
+    - _WindWavesScale: 0.141
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1: {r: 0.1407533, g: 0.7924528, b: 0.048593827, a: 0}
-    - _Color2: {r: 0.4826833, g: 0.43543077, b: 0.9716981, a: 0}
+    - _Color1: {r: 0, g: 0.8018868, b: 0.091814734, a: 0}
+    - _Color2: {r: 0.44480783, g: 0.3915094, b: 1, a: 0}
     - _CoverageColor: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SnowColor: {r: 1, g: 1, b: 1, a: 0}

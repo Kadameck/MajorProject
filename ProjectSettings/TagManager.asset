@@ -11,6 +11,7 @@ TagManager:
   - BasicMagic
   - MagicInteractive
   - Prisma
+  - Mechanism
   layers:
   - Default
   - TransparentFX

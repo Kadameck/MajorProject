@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2761995308852606906}
   - component: {fileID: 7146685766589865132}
-  m_Layer: 0
+  - component: {fileID: 223663231}
+  m_Layer: 2
   m_Name: AN_Cliff_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,6 +57,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4503731558390125551}
   m_Enabled: 1
+--- !u!65 &223663231
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157369859829564841}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.0547485, y: 6.543247, z: 1}
+  m_Center: {x: 0.11514282, y: 2.3627882, z: 0}
 --- !u!1 &5592965918244852719
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,7 +81,7 @@ GameObject:
   - component: {fileID: 2252815713244555603}
   - component: {fileID: 7642986233254981455}
   - component: {fileID: 1703254465510713234}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +162,7 @@ GameObject:
   - component: {fileID: 6046902346830481150}
   - component: {fileID: 9076545426728933632}
   - component: {fileID: 4503731558390125551}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
