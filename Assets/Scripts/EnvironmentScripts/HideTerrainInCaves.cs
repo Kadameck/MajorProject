@@ -7,17 +7,14 @@ using UnityEngine;
 /// </summary>
 public class HideTerrainInCaves : MonoBehaviour
 {
-    [Tooltip("Other Objects that should disapear")]
-    public GameObject[] otherObjects;
-
-    // The Terrain taht should be enabled/disabled
-    private Terrain terrain;
+    // Gameobject that contains the Terrain
+    private GameObject terrainHolder;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Finds the terrain
-        terrain = FindObjectOfType<Terrain>();
+        // Finds the gameobject that contains the Terrain
+        terrainHolder = GameObject.FindGameObjectWithTag("TerrainHolder");
     }
 
     /// <summary>
@@ -43,12 +40,7 @@ public class HideTerrainInCaves : MonoBehaviour
         // Wait until the next "fixed update" to avoid errors
         yield return new WaitForFixedUpdate();
 
-        // Disable or enable the terrain
-        terrain.enabled = false;
-
-        foreach (GameObject g in otherObjects)
-        {
-            g.SetActive(false);
-        }
+        // Deactivates the object that contains the terrain
+        terrainHolder.SetActive(false);
     }
 }

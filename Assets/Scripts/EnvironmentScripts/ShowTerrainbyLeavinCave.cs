@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class ShowTerrainbyLeavinCave : MonoBehaviour
 {
-    private HideTerrainInCaves hTIC;
-    // The Terrain taht should be enabled/disabled
-    private Terrain terrain;
+    // gameobject that contains the Terrain
+    private GameObject terrainHolder;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Finds the terrain
-        terrain = FindObjectOfType<Terrain>();
-        hTIC = FindObjectOfType<HideTerrainInCaves>();
+        // Finds the gameobject that contains the Terrain
+        terrainHolder = GameObject.FindGameObjectWithTag("TerrainHolder");
     }
 
     /// <summary>
@@ -39,12 +37,7 @@ public class ShowTerrainbyLeavinCave : MonoBehaviour
         // Wait until the next "fixed update" to avoid errors
         yield return new WaitForFixedUpdate();
 
-        // Disable or enable the terrain
-        terrain.enabled = true;
-
-        foreach(GameObject g in hTIC.otherObjects)
-        {
-            g.SetActive(true);
-        }
+        // Activates the object that contains terrain
+        terrainHolder.SetActive(true);
     }
 }
