@@ -12,6 +12,7 @@ TagManager:
   - MagicInteractive
   - Prisma
   - Mechanism
+  - CarrySphere
   layers:
   - Default
   - TransparentFX

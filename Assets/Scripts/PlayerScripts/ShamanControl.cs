@@ -7,9 +7,6 @@ using UnityEngine;
 /// </summary>
 public class ShamanControl : MonoBehaviour
 {
-    // The Speed multiplicators of the playeer
-    [SerializeField]
-    float walkSpeed = 500;
     [SerializeField]
     float sneakSpeed = 150;
     [SerializeField]
@@ -20,19 +17,24 @@ public class ShamanControl : MonoBehaviour
     GameObject magicBall;
     [SerializeField]
     Transform hand;
+    [SerializeField]
+    GameObject carrySphere;
 
     [HideInInspector]
     public bool isClimbing = false;
 
+    // The Speed multiplicators of the playeer
+    public float walkSpeed = 500;
+
     // Movement y value
     private float yDirect;
-
     // The rigidbody component of the player
     private Rigidbody rb;
-
     private bool canUsebasicMagic = true;
     private bool useMagic = false;
+    private bool puttDownSomething = false;
     private GameObject currentMagicBall;
+    private GameObject currentlyCarriedObject;
 
     // Awake is called at the spawn of the object
     void Awake()
@@ -44,7 +46,8 @@ public class ShamanControl : MonoBehaviour
     // FixedUpdate is called regularly at a fixed interval
     void FixedUpdate()
     {
-        UseMagic();
+        //UseMagic();
+        Interact();
         Movement();
     }
 
@@ -105,6 +108,76 @@ public class ShamanControl : MonoBehaviour
         {
             // Rotates the player smoothly so that it is looking to the movement direction
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetDir), rotationSpeed * Time.deltaTime);
+        }
+    }
+
+    /// <summary>
+    /// Check for Interaction
+    /// </summary>
+    private void Interact()
+    {
+        // Checks if the player clicks on something (left click)
+        if(Input.GetMouseButtonDown(0))
+        {
+            // TRay to Carry something
+            Carry();
+
+            // If the player doesnt carry anysthing
+            if(currentlyCarriedObject == null)
+            {
+                // Chekcs if the player was put down something this frame
+                if(puttDownSomething)
+                {
+                    // Start a timer to prevent the Basic Magic Skill from being activated from the same click action the player use to put down the object that her currently carried
+                    StartCoroutine(PutDownResetTimer());
+                }
+                else
+                {
+                    // Activated the basic magic skill
+                    UseMagic();
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Start and stop the carring ob an portable object
+    /// </summary>
+    private void Carry()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            //Checks if it is a portable object the player clicked on
+            if (hit.collider.gameObject.GetComponent<CarryObject>() != null)
+            {
+                // Checks if the player doesn't is carrying something right now
+                if (currentlyCarriedObject == null)
+                {
+                        currentlyCarriedObject = hit.collider.gameObject;
+                        currentlyCarriedObject.GetComponent<CarryObject>().Take(carrySphere);
+
+                    // Set the clicked object as carried object
+                }
+            }
+            // If the cklicked object was not a portable object
+            else
+            {
+                // if the player is carring a object right now...
+                if(currentlyCarriedObject != null)
+                {
+                    // Checks if the clicked spot is a valide one to placing something
+                    if(hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.GetComponent<SlotForSomethingPortable>() != null)
+                    {
+                        // Put the carried object down and resets all carring variables
+                        currentlyCarriedObject.GetComponent<CarryObject>().PutDown(hit.point);
+                        currentlyCarriedObject = null;
+                        puttDownSomething = true;
+                    }
+                }
+            }
         }
     }
 
@@ -255,5 +328,12 @@ public class ShamanControl : MonoBehaviour
                 count = 1;
             }
         }
+    }
+
+    // Start a timer to prevent the Basic Magic Skill from being activated from the same click action the player use to put down the object that her currently carried
+    IEnumerator PutDownResetTimer()
+    {
+        yield return new WaitForEndOfFrame();
+        puttDownSomething = false;
     }
 }
