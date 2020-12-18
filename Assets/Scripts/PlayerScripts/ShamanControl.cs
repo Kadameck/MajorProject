@@ -73,9 +73,6 @@ public class ShamanControl : MonoBehaviour
                     // Calls the PlayerRotation function
                     PlayerRotation(targetDir);
 
-                    // Calls the GroundScann function to check whether there is ground under the player and, if so, in which y direction the player must move
-                    //    if (GroundScan())
-                    //  {
                     // Checks if the player should sneak
                     if (Sneak())
                     {
@@ -87,20 +84,14 @@ public class ShamanControl : MonoBehaviour
                         // Moves the player normal speed
                         rb.velocity = new Vector3(xMove, yDirect, zMove) * walkSpeed * Time.deltaTime;
                     }
-                    // }
-                    // else
-                    //{
                     // Drops the player
                     rb.velocity += new Vector3(0.0f, -1.0f, 0.0f);
-                    //}
                 }
             }
             else
             {
                 rb.velocity += new Vector3(0.0f, -1.0f, 0.0f);
             }
-            // Checks if the player wants to move
-       
         }
     }
 
@@ -123,26 +114,22 @@ public class ShamanControl : MonoBehaviour
     /// </summary>
     private void Interact()
     {
-        // Checks if the player clicks on something (left click)
-        if(Input.GetMouseButtonDown(0))
-        {
-            // TRay to Carry something
-            Carry();
+        // Try to Carry something
+        Carry();
 
-            // If the player doesnt carry anysthing
-            if(currentlyCarriedObject == null)
+        // If the player doesnt carry anysthing
+        if(currentlyCarriedObject == null)
+        {
+            // Chekcs if the player was put down something this frame
+            if(puttDownSomething)
             {
-                // Chekcs if the player was put down something this frame
-                if(puttDownSomething)
-                {
-                    // Start a timer to prevent the Basic Magic Skill from being activated from the same click action the player use to put down the object that her currently carried
-                    StartCoroutine(PutDownResetTimer());
-                }
-                else
-                {
-                    // Activated the basic magic skill
-                    UseMagic();
-                }
+                // Start a timer to prevent the Basic Magic Skill from being activated from the same click action the player use to put down the object that her currently carried
+                StartCoroutine(PutDownResetTimer());
+            }
+            else
+            {
+                // Activated the basic magic skill
+                UseMagic();
             }
         }
     }
@@ -152,36 +139,39 @@ public class ShamanControl : MonoBehaviour
     /// </summary>
     private void Carry()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit))
+        if (Input.GetMouseButtonDown(0) && !useMagic)
         {
-            //Checks if it is a portable object the player clicked on
-            if (hit.collider.gameObject.GetComponent<CarryObject>() != null)
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
             {
-                // Checks if the player doesn't is carrying something right now
-                if (currentlyCarriedObject == null)
+                //Checks if it is a portable object the player clicked on
+                if (hit.collider.gameObject.GetComponent<CarryObject>() != null)
                 {
+                    // Checks if the player doesn't is carrying something right now
+                    if (currentlyCarriedObject == null)
+                    {
                         currentlyCarriedObject = hit.collider.gameObject;
                         currentlyCarriedObject.GetComponent<CarryObject>().Take(carrySphere);
 
-                    // Set the clicked object as carried object
+                        // Set the clicked object as carried object
+                    }
                 }
-            }
-            // If the cklicked object was not a portable object
-            else
-            {
-                // if the player is carring a object right now...
-                if(currentlyCarriedObject != null)
+                // If the cklicked object was not a portable object
+                else
                 {
-                    // Checks if the clicked spot is a valide one to placing something
-                    if(hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.GetComponent<SlotForSomethingPortable>() != null)
+                    // if the player is carring a object right now...
+                    if (currentlyCarriedObject != null)
                     {
-                        // Put the carried object down and resets all carring variables
-                        currentlyCarriedObject.GetComponent<CarryObject>().PutDown(hit.point);
-                        currentlyCarriedObject = null;
-                        puttDownSomething = true;
+                        // Checks if the clicked spot is a valide one to placing something
+                        if (hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.GetComponent<SlotForSomethingPortable>() != null)
+                        {
+                            // Put the carried object down and resets all carring variables
+                            currentlyCarriedObject.GetComponent<CarryObject>().PutDown(hit.point);
+                            currentlyCarriedObject = null;
+                            puttDownSomething = true;
+                        }
                     }
                 }
             }
@@ -193,6 +183,14 @@ public class ShamanControl : MonoBehaviour
     /// </summary>
     public void UseMagic()
     {
+        if(Input.GetMouseButtonDown(1) && useMagic)
+        {
+            SUAVisualisation.enabled = false;
+            useMagic = false;
+            Destroy(currentMagicBall);
+            currentMagicBall = null;
+        }
+
         // Checks if the player does a left click and the basic Magic skill doesn't have a cooldown currently
         if (Input.GetMouseButtonDown(0) && canUsebasicMagic)
         {
