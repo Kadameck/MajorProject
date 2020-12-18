@@ -14,6 +14,8 @@ public class StonePortalMechanism : MonoBehaviour
     private bool solved = false;
     private Animator anim;
 
+    public bool opening;
+
     private void Start()
     {
         prismStates = new bool[activationPrismsOrLightstones.Length];
@@ -68,7 +70,7 @@ public class StonePortalMechanism : MonoBehaviour
     private bool CheckForSolution()
     {
         // Soolt durch die bool array elemente
-        for (int i = 0; i < prismStates.Length-1; i++)
+        for (int i = 0; i < prismStates.Length; i++)
         {
             // prüft für jedes element ob es true ist
             if(prismStates[i] == true)
@@ -89,9 +91,8 @@ public class StonePortalMechanism : MonoBehaviour
 
     private void OpenPortal()
     {
-        Debug.Log("bahdjkahdjkha");
-        anim.SetBool("open", true);
-        //Destroy(PortalDoor.gameObject);
-        //PortalDoor = null;
+        opening = true;
+       // Destroy(PortalDoor.gameObject);
+       // PortalDoor = null;
     }
 }
