@@ -12,10 +12,12 @@ public class StonePortalMechanism : MonoBehaviour
 
     private bool[] prismStates;
     private bool solved = false;
+    private Animator anim;
 
     private void Start()
     {
         prismStates = new bool[activationPrismsOrLightstones.Length];
+        anim = PortalDoor.GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -87,7 +89,9 @@ public class StonePortalMechanism : MonoBehaviour
 
     private void OpenPortal()
     {
-        Destroy(PortalDoor.gameObject);
-        PortalDoor = null;
+        Debug.Log("bahdjkahdjkha");
+        anim.SetBool("open", true);
+        //Destroy(PortalDoor.gameObject);
+        //PortalDoor = null;
     }
 }
