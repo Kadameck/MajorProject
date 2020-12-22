@@ -8,8 +8,9 @@ public class OrbMovement : MonoBehaviour
     float orbSpeed = 0.1f;
 
     [SerializeField]
-    List<Transform> wayPoints;
+    GameObject waypointHolder;
 
+    private List<Vector3> wayPoints = new List<Vector3>();
     private Transform orbTrans;
     private Transform playerTrans;
     private Rigidbody rb;
@@ -21,6 +22,13 @@ public class OrbMovement : MonoBehaviour
         orbTrans = GameObject.FindGameObjectWithTag("Orb").transform;
         playerTrans = GameObject.FindGameObjectWithTag("Player").transform;
         rb = orbTrans.gameObject.GetComponent<Rigidbody>();
+
+        // Loopt durch alle Childobjekte des Waypoint holders
+        for (int i = 0; i < waypointHolder.transform.childCount-1; i++)
+        {
+            // Füllt die Liste mit allen child positionen im waypointHolder
+            wayPoints.Add(waypointHolder.transform.GetChild(i).position);
+        }
     }
 
     // Update is called once per frame
@@ -30,10 +38,10 @@ public class OrbMovement : MonoBehaviour
 
         if (Vector3.Distance(orbTrans.position, playerTrans.position) < 20)
         {
-            orbTrans.LookAt(wayPoints[iterator].position);
+            orbTrans.LookAt(wayPoints[iterator]);
             orbTrans.Translate(new Vector3(0.0f, 0.0f, Time.deltaTime * orbSpeed));
 
-            if (Vector3.Distance(orbTrans.position, wayPoints[iterator].position) < 2)
+            if (Vector3.Distance(orbTrans.position, wayPoints[iterator]) < 2)
             {
                 if(iterator == wayPoints.Count-1)
                 {
