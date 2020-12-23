@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class OrbFollowPath : MonoBehaviour
 {
+    [SerializeField, Tooltip("Specifies how long the orb should wait for the player before he leaves the path to follow the player (Seconds)")]
+    float waitingTimer = 10;
     // Die Objekte die die Waypoints enthalten
-    [SerializeField]
+    [SerializeField, Tooltip("The waypoint containers that together make up the desired path. Each container consists of 4 waypoints")]
     GameObject[] pathContainer; // routes
 
-    int iterator = 0;
-
+    private OrbStageTransition oST;
+    private Transform player;
+    private int iterator = 0;
     private List<Vector3> positions = new List<Vector3>();
     private List<Vector3> gizmoPositions = new List<Vector3>();
     private Vector3 gizmoPos;
@@ -18,10 +21,18 @@ public class OrbFollowPath : MonoBehaviour
     private float speed;
     private bool canStartNewCoroutine;
     private int c;
-    
+    private Coroutine wFPCoroutine;
+    private bool followPlayer = false;
+    private Vector3 lastPathPosition;
+    private bool stageFinished = false;
+    private bool transitionHasStarted = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        oST = GetComponent<OrbStageTransition>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
         t = 0;
         speed = 0.5f;
         canStartNewCoroutine = true;
@@ -35,47 +46,133 @@ public class OrbFollowPath : MonoBehaviour
                 positions.Add(pathContainer[container].transform.GetChild(waypoint).position);
             }
         }
+
+        transform.position = positions[0];
     }
 
     private void Update()
     {
-        if (canStartNewCoroutine) { StartCoroutine(Follow()); }
+        if(stageFinished && !transitionHasStarted) { StartStageTransition(); }
+        if(followPlayer) { FollowPlayer(); }
+        if (canStartNewCoroutine && !followPlayer && !stageFinished) { StartCoroutine(FollowPath()); }
     }
 
-    IEnumerator Follow()
+    IEnumerator FollowPath()
     {
-        canStartNewCoroutine = !canStartNewCoroutine;
-
-        Vector3 p0 = positions[iterator + 0];
-        Vector3 p1 = positions[iterator + 1];
-        Vector3 p2 = positions[iterator + 2];
-        Vector3 p3 = positions[iterator + 3];
-        
-        iterator += 4;
-
-        while(t < 1)
+        // Prüft ob der Spieler na genug am orb ist damit der orb weiter dem Pfad folgen kann
+        if (CloseEnoughCheck(transform.position, player.position, 10.0f))
         {
-            t += Time.deltaTime * speed;
+            if(wFPCoroutine != null)
+            {
+                StopCoroutine(wFPCoroutine);
+                wFPCoroutine = null;
+            }
 
-            orbPos = Mathf.Pow(1 - t, 3) * p0 +
-                       3 * Mathf.Pow(1 - t, 2) * t * p1 +
-                       3 * (1 - t) * Mathf.Pow(t, 2) * p2 +
-                       Mathf.Pow(t, 3) * p3;
-            
-            transform.position = orbPos;
-            yield return new WaitForEndOfFrame();
+            canStartNewCoroutine = !canStartNewCoroutine;
+
+            Vector3 p0 = positions[iterator + 0];
+            Vector3 p1 = positions[iterator + 1];
+            Vector3 p2 = positions[iterator + 2];
+            Vector3 p3 = positions[iterator + 3];
+
+            iterator += 4;
+
+            while (t < 1)
+            {
+                t += Time.deltaTime * speed;
+
+                // Bézier Curve
+                orbPos = Mathf.Pow(1 - t, 3) * p0 +
+                           3 * Mathf.Pow(1 - t, 2) * t * p1 +
+                           3 * (1 - t) * Mathf.Pow(t, 2) * p2 +
+                           Mathf.Pow(t, 3) * p3;
+
+                transform.position = orbPos;
+                yield return new WaitForEndOfFrame();
+            }
+
+            t = 0f;
+
+            if (iterator + 3 > positions.Count - 1)
+            {
+                SetStageFinished();
+                iterator = 0;
+            }
+
+            canStartNewCoroutine = !canStartNewCoroutine;
         }
-
-        t = 0f;
-
-        if(iterator + 3 > positions.Count - 1)
+        else
         {
-            iterator = 0;
+            if(wFPCoroutine == null)
+            {
+                wFPCoroutine = StartCoroutine(WaitForPlayer());
+            }
         }
-
-        canStartNewCoroutine = !canStartNewCoroutine;
     }
 
+    /// <summary>
+    /// Berechnet die Distanz zwischen den beiden angegebenen punkten und gibt nur dann true zurück wenn der angegebene maximalwert eingehalten wird
+    /// </summary>
+    /// <returns>Is the player close enough to the orb?</returns>
+    private bool CloseEnoughCheck(Vector3 controllPosA, Vector3 controllPosB, float maxDistance)
+    {
+        if(Vector3.Distance(controllPosA, controllPosB) <= maxDistance)
+        {
+            return true;
+        }
+        
+        return false;
+    }
+
+    private IEnumerator WaitForPlayer()
+    {
+        lastPathPosition = transform.position;
+        yield return new WaitForSeconds(waitingTimer);
+        followPlayer = true;
+        wFPCoroutine = null;
+    }
+
+    private void FollowPlayer()
+    {
+        // Prüft ob der spieler zu weit vom orb weg ist
+        if(!CloseEnoughCheck(transform.position, player.position, 10.0f))
+        {
+            // Wenn der spieler zu weit vom orb weg ist, folgt der orb dem spieler
+            transform.LookAt(player.position);
+            transform.Translate(Vector3.forward * Time.deltaTime * (speed * 10));
+        }
+        // Wenn der spieler nah genug am orb ist...
+        else
+        {
+            // Wenn der spieler nah genug am orb ist aber der orb nicht nah genug an seiner letzten pfadposition
+            if(!CloseEnoughCheck(lastPathPosition, transform.position, 0.1f))
+            {
+                transform.LookAt(lastPathPosition);
+                // dann bewegt sich der orb zu seiner letzten pfadposition
+                transform.Translate(Vector3.forward * Time.deltaTime * (speed*10));
+            }
+            // ist der spieler nah genug am orb und der orb selbst (und somit auch der spieler) nah genug an der letzten pfadposition
+            else
+            {
+                followPlayer = false;
+            }
+        }
+    }
+
+    public bool GetStageFinished()
+    {
+        return stageFinished;
+    }
+    private void SetStageFinished()
+    {
+        stageFinished = !stageFinished;
+    }
+
+    private void StartStageTransition()
+    {
+        transitionHasStarted = true;
+        oST.StartTransition(1);
+    }
     private void OnDrawGizmos()
     {
         gizmoPositions.Clear();
