@@ -17,17 +17,21 @@ public class OrbStageTransition : MonoBehaviour
     /// <param name="stageIndex">1 = </param>
     public void StartTransition(int stageIndex)
     {
-        if(stageIndex == 1)
+        if(stageIndex == 0)
         {
             LightstoneTransition();
         }
-        else if (stageIndex == 2)
+        else if (stageIndex == 1)
         {
             RiverTransition();
         }
+        else if (stageIndex == 2)
+        {
+            MissingPrismTransition();
+        }
         else if (stageIndex == 3)
         {
-            GroveTRansition();
+            GroveTransition();
         }
         else
         {
@@ -35,12 +39,19 @@ public class OrbStageTransition : MonoBehaviour
         }
     }
 
+    /****************************************************************************************************************************************************************************
+     *                                                                                                                                                                          *
+     *             In den XYZTransition Funktionen können jetzt die verhalten programmiert werden die der orb haben soll ehe er in die nächste stage welchselt                  *
+     *                                                                                                                                                                          *
+     ***************************************************************************************************************************************************************************/ 
+
     /// <summary>
     /// The Orb is now at the serpentin Lightstone
     /// </summary>
     private void LightstoneTransition()
     {
         Debug.Log("Bin am Lichtstein");
+        oFP.StartNextStage();
     }
 
     /// <summary>
@@ -49,12 +60,19 @@ public class OrbStageTransition : MonoBehaviour
     private void RiverTransition()
     {
         Debug.Log("Bin am Fluss");
+        oFP.StartNextStage();
+    }
+
+    private void MissingPrismTransition()
+    {
+        Debug.Log("Bin am fehlenden Prisma");
+        oFP.StartNextStage();
     }
 
     /// <summary>
     /// The last stage is comleted
     /// </summary>
-    private void GroveTRansition()
+    private void GroveTransition()
     {
         Debug.Log("Bin Tot");
         Destroy(this.gameObject);

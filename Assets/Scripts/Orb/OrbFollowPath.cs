@@ -7,8 +7,12 @@ public class OrbFollowPath : MonoBehaviour
     [SerializeField, Tooltip("Specifies how long the orb should wait for the player before he leaves the path to follow the player (Seconds)")]
     float waitingTimer = 10;
     // Die Objekte die die Waypoints enthalten
-    [SerializeField, Tooltip("The waypoint containers that together make up the desired path. Each container consists of 4 waypoints")]
-    GameObject[] pathContainer; // routes
+    //[SerializeField, Tooltip("The waypoint containers that together make up the desired path. Each container consists of 4 waypoints")]
+    //GameObject[] pathContainer; // routes
+
+    public GameObject[] stages;
+
+    private List<GameObject> pathContainer = new List<GameObject>();
 
     private OrbStageTransition oST;
     private Transform player;
@@ -26,6 +30,7 @@ public class OrbFollowPath : MonoBehaviour
     private Vector3 lastPathPosition;
     private bool stageFinished = false;
     private bool transitionHasStarted = false;
+    private int stageNumb;
 
     // Start is called before the first frame update
     void Start()
@@ -36,12 +41,31 @@ public class OrbFollowPath : MonoBehaviour
         t = 0;
         speed = 0.5f;
         canStartNewCoroutine = true;
+        stageNumb = 0;
+
+        InitStage(stageNumb);
+    }
+
+    /// <summary>
+    /// Erfasst die punkte dir für die berechnung der nun zu folgenden stage benötigt werden und speichert diese in der richtigen reihenfolge in einer liste
+    /// </summary>
+    /// <param name="stageNumber">Die stage der gefolgt werden soll (0= die erste, 1= die zweite, usw</param>
+    private void InitStage(int stageNumber)
+    {
+        pathContainer.Clear();
+        positions.Clear();
+
+        // Loopt durch die child (also container) des ersten stage
+        for (int stageChilds = 0; stageChilds < stages[stageNumber].transform.childCount; stageChilds++)
+        {
+            pathContainer.Add(stages[stageNumber].transform.GetChild(stageChilds).gameObject);
+        }
 
         // Loopt durch die container
-        for (int container = 0; container < pathContainer.Length; container++)
+        for (int container = 0; container < pathContainer.Count; container++)
         {
             // Loopt durch die Childobjekte des pathcontainers
-            for (int waypoint= 0; waypoint < pathContainer[container].transform.childCount; waypoint++)
+            for (int waypoint = 0; waypoint < pathContainer[container].transform.childCount; waypoint++)
             {
                 positions.Add(pathContainer[container].transform.GetChild(waypoint).position);
             }
@@ -57,6 +81,10 @@ public class OrbFollowPath : MonoBehaviour
         if (canStartNewCoroutine && !followPlayer && !stageFinished) { StartCoroutine(FollowPath()); }
     }
 
+    /// <summary>
+    /// Der algorythmus der dafür sorgt das der orb allen bezier kurven der aktuellen stage nach einander folgt
+    /// </summary>
+    /// <returns></returns>
     IEnumerator FollowPath()
     {
         // Prüft ob der Spieler na genug am orb ist damit der orb weiter dem Pfad folgen kann
@@ -124,6 +152,11 @@ public class OrbFollowPath : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Wartet auf den spieler
+    /// Wird abgebrochen wenn der spieler kommt oder leitet die spieler verfolgung ein wenn der spieler zu lange weg bleibt
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator WaitForPlayer()
     {
         lastPathPosition = transform.position;
@@ -132,6 +165,9 @@ public class OrbFollowPath : MonoBehaviour
         wFPCoroutine = null;
     }
 
+    /// <summary>
+    /// Verfolgt den spieler
+    /// </summary>
     private void FollowPlayer()
     {
         // Prüft ob der spieler zu weit vom orb weg ist
@@ -158,54 +194,78 @@ public class OrbFollowPath : MonoBehaviour
             }
         }
     }
-
-    public bool GetStageFinished()
-    {
-        return stageFinished;
-    }
+    
+    /// <summary>
+    /// Welchselt zwischen stage ist beendet und stage ist nicht beendet (für die übergänge zwischen den stages)
+    /// </summary>
     private void SetStageFinished()
     {
         stageFinished = !stageFinished;
     }
 
+    /// <summary>
+    /// Startet das verhalten das der orb jeweils zwischen den stages haben soll (zB beim lichtstein soll der orb den spieler darauf hinweisen dass er den stein aktivieren kann ehe
+    /// er (der orb) weiter zur nächsten stage geht)
+    /// </summary>
     private void StartStageTransition()
     {
         transitionHasStarted = true;
-        oST.StartTransition(1);
+        oST.StartTransition(stageNumb);
     }
-    private void OnDrawGizmos()
+    
+    /// <summary>
+    /// Startet die nächste stage und setzt entsprechend alle variablen zurück die dafür gebraucht werden
+    /// </summary>
+    public void StartNextStage()
     {
-        gizmoPositions.Clear();
-        c = 0;
-
-        for (int container = 0; container < pathContainer.Length; container++)
-        {
-            // Loopt durch die Childobjekte des pathcontainers
-            for (int waypoint = 0; waypoint < pathContainer[container].transform.childCount; waypoint++)
-            {
-                gizmoPositions.Add(pathContainer[container].transform.GetChild(waypoint).position);
-            }
-
-            for (float i = 0; i <= 1; i += 0.05f)
-            {
-                gizmoPos = Mathf.Pow(1 - i, 3) * gizmoPositions[c] +
-                           3 * Mathf.Pow(1 - i, 2) * i * gizmoPositions[c + 1] +
-                           3 * (1 - i) * Mathf.Pow(i, 2) * gizmoPositions[c + 2] +
-                           Mathf.Pow(i, 3) * gizmoPositions[c + 3];
-
-                Gizmos.color = Color.magenta;
-                Gizmos.DrawSphere(gizmoPos, 0.25f);
-
-            }
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(gizmoPositions[c], gizmoPositions[c + 1]);
-            Gizmos.DrawLine(gizmoPositions[c + 2], gizmoPositions[c+ 3]);
-
-            Gizmos.color = Color.blue;
-            Gizmos.DrawSphere(gizmoPositions[c + 1], 0.75f);
-            Gizmos.DrawSphere(gizmoPositions[c + 2], 0.75f);
-            
-            c += 4;
-        }
+        SetStageFinished();
+        followPlayer = false;
+        transitionHasStarted = false;
+        stageNumb++;
+        InitStage(stageNumb);
     }
+   // private void OnDrawGizmos()
+   // {
+   //     gizmoPositions.Clear();
+   //     c = 0;
+   //
+   //     if (pathContainer.Count == 0)
+   //     {
+   //         // Loopt durch die child (also container) des ersten stage
+   //         for (int stageChilds = 0; stageChilds < stages[0].transform.childCount; stageChilds++)
+   //         {
+   //             pathContainer.Add(stages[0].transform.GetChild(stageChilds).gameObject);
+   //         }
+   //     }
+   //
+   //     for (int container = 0; container < pathContainer.Count; container++)
+   //     {
+   //         // Loopt durch die Childobjekte des pathcontainers
+   //         for (int waypoint = 0; waypoint < pathContainer[container].transform.childCount; waypoint++)
+   //         {
+   //             gizmoPositions.Add(pathContainer[container].transform.GetChild(waypoint).position);
+   //         }
+   //
+   //         for (float i = 0; i <= 1; i += 0.05f)
+   //         {
+   //             gizmoPos = Mathf.Pow(1 - i, 3) * gizmoPositions[c] +
+   //                        3 * Mathf.Pow(1 - i, 2) * i * gizmoPositions[c + 1] +
+   //                        3 * (1 - i) * Mathf.Pow(i, 2) * gizmoPositions[c + 2] +
+   //                        Mathf.Pow(i, 3) * gizmoPositions[c + 3];
+   //
+   //             Gizmos.color = Color.magenta;
+   //             Gizmos.DrawSphere(gizmoPos, 0.25f);
+   //
+   //         }
+   //         Gizmos.color = Color.red;
+   //         Gizmos.DrawLine(gizmoPositions[c], gizmoPositions[c + 1]);
+   //         Gizmos.DrawLine(gizmoPositions[c + 2], gizmoPositions[c+ 3]);
+   //
+   //         Gizmos.color = Color.blue;
+   //         Gizmos.DrawSphere(gizmoPositions[c + 1], 0.75f);
+   //         Gizmos.DrawSphere(gizmoPositions[c + 2], 0.75f);
+   //         
+   //         c += 4;
+   //     }
+   // }
 }
