@@ -9,15 +9,16 @@ public class Prism : MonoBehaviour
 {
     [SerializeField, Tooltip("Target of the light beam\nLeaving this field empty Causes the light beam to go straight on based on the current orientation of the prism.\nAttention: This function overrides the rotation of the prism so that it is always aligned with the specified target. However, it can still be postponed.")]
     Transform target;
-    [SerializeField, Tooltip("Should the light beam adjust as the prism moves or rotates?\nAttention: Rotating the prism does not work if a specific target has been specified. The Rotation of the prism will always orient itself towards this target.")]
-    bool dynamicLightBeam;
-
+    
+    // Same as dynamicLightBeam from Lightstones
+    private bool dynamicLightBeam;
     // LineRenderer of this gameobject
     private LineRenderer lRend;
     // The other Prism that is aktive just because of this prism
     private GameObject currentTargetPrism;
 
     private GameObject currentTargetMechanism;
+
     /// <summary>
     /// Creates a LineRenderer and make it disabled
     /// Gives this Object also the Prisma tag
@@ -51,8 +52,9 @@ public class Prism : MonoBehaviour
     /// Starts the lightbeam
     /// </summary>
     /// <param name="lRenderer">The LineRenderer Component of the lightStone or other prism that activates this prism</param>
-    public void SetPrismActive(LineRenderer lRenderer)
+    public void SetPrismActive(LineRenderer lRenderer, bool dymLight)
     {
+        dynamicLightBeam = dymLight;
         // Sets all light beam properties to match those of the object that activates this prism
         lRend.colorGradient = lRenderer.colorGradient;
         lRend.widthCurve = lRenderer.widthCurve;
@@ -135,7 +137,7 @@ public class Prism : MonoBehaviour
                         // The hitten prism will be set as currently activated prism
                         currentTargetPrism = hit.collider.gameObject;
                         // The hitte
-                        currentTargetPrism.GetComponent<Prism>().SetPrismActive(lRend);
+                        currentTargetPrism.GetComponent<Prism>().SetPrismActive(lRend, dynamicLightBeam);
 
                     }
                 }
@@ -150,7 +152,7 @@ public class Prism : MonoBehaviour
                         // Sets the hitten prism as new activ prism
                         currentTargetPrism = hit.collider.gameObject;
                         // Activates the new hitten prism
-                        currentTargetPrism.GetComponent<Prism>().SetPrismActive(lRend);
+                        currentTargetPrism.GetComponent<Prism>().SetPrismActive(lRend, dynamicLightBeam);
                     }
                 }
             }

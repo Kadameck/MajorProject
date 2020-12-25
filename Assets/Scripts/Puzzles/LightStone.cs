@@ -70,11 +70,23 @@ public class LightStone : MonoBehaviour
         // Checks if the light stone should start active
         if (isActive)
         {
-            // Initialize the lineRenderer and sets its start and target point
-            InitializeLine();
-            //RaycastShot();
-            FindTarget();
+            StartCoroutine(WaitForInit());
         }
+    }
+
+    /// <summary>
+    /// Counteracts the fact that the awake method of the prisms is only carried out after the start method of the light stones
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator WaitForInit()
+    {
+        // Ensures that the following code is only executed after the prisms awake method
+        yield return new WaitForEndOfFrame();
+        // Initialize the lineRenderer and sets its start and target point
+        InitializeLine();
+        //RaycastShot();
+        FindTarget();
+
     }
 
     /// <summary>
@@ -263,7 +275,7 @@ public class LightStone : MonoBehaviour
                     
                     // Sets the new hitten prism as currently from this lightstone activated and actually activates it
                     currentTargetPrism = hit.collider.gameObject;
-                    hit.collider.gameObject.GetComponent<Prism>().SetPrismActive(lRend);
+                    hit.collider.gameObject.GetComponent<Prism>().SetPrismActive(lRend, dynamicLightBeam);
                 }
             }
             // IF the Raycast doesnt hit a prism
