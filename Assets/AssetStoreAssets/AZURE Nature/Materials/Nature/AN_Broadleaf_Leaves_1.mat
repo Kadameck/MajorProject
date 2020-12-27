@@ -11,7 +11,6 @@ Material:
   m_Shader: {fileID: 4800000, guid: 0154318cd2c5a3747a66420b5d885dd5, type: 3}
   m_ShaderKeywords: _COLOR2ENABLE_ON _COLOR2OVERLAYTYPE_VERTEX_POSITION_BASED _COLOR2_ON
     _ENABLECOLOR2_ON _KEYWORD0_ON _SNOWOVERLAYTYPE_WORLD_NORMAL_BASED _TREETYPE_BROADLEAF
-    _WIND_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -148,7 +147,7 @@ Material:
     - _Translucency: 2
     - _TreeType: 0
     - _UVSec: 0
-    - _WIND: 1
+    - _WIND: 0
     - _Wind: 1
     - _WindForce: 0.327
     - _WindSpeed: 0.5

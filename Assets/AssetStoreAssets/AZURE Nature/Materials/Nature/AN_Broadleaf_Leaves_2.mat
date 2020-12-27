@@ -10,7 +10,6 @@ Material:
   m_Name: AN_Broadleaf_Leaves_2
   m_Shader: {fileID: 4800000, guid: 0154318cd2c5a3747a66420b5d885dd5, type: 3}
   m_ShaderKeywords: _COLOR2OVERLAYTYPE_VERTEX_POSITION_BASED _SNOWOVERLAYTYPE_WORLD_NORMAL_BASED
-    _WIND_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -71,7 +70,7 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Color2Enable: 0
-    - _Color2Fade: 0.224
+    - _Color2Fade: -0.437
     - _Color2Level: -8.46
     - _Color2OverlayType: 0
     - _Cutoff: 0.306
@@ -100,7 +99,7 @@ Material:
     - _TransShadow: 1
     - _Translucency: 2
     - _UVSec: 0
-    - _WIND: 1
+    - _WIND: 0
     - _WindForce: 0.327
     - _WindSpeed: 0.5
     - _WindWavesScale: 0.25
@@ -109,6 +108,6 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 0.039215658, g: 0.1523414, b: 0.8980392, a: 0}
-    - _Color2: {r: 0, g: 0.0666666, b: 1, a: 0}
+    - _Color2: {r: 0.43780947, g: 0, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

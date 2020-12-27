@@ -11,7 +11,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: 0154318cd2c5a3747a66420b5d885dd5, type: 3}
   m_ShaderKeywords: _COLOR2ENABLE_ON _COLOR2OVERLAYTYPE_VERTEXPOSITIONBASED _COLOR2OVERLAYTYPE_VERTEX_POSITION_BASED
     _COLOR2TYPE_VERTEXPOSITIONBASED _KEYWORD0_ON _SNOWOVERLAYTYPE_WORLDNORMALBASED
-    _SNOWOVERLAYTYPE_WORLD_NORMAL_BASED _TREETYPE_BROADLEAF _WIND_ON
+    _SNOWOVERLAYTYPE_WORLD_NORMAL_BASED _TREETYPE_BROADLEAF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -119,8 +119,8 @@ Material:
     - _Smoothness: 0.408
     - _SmoothnessTextureChannel: 0
     - _Snow: 0
-    - _SnowAmount: 0
-    - _SnowFade: 0.015
+    - _SnowAmount: 0.214
+    - _SnowFade: 0.002
     - _SnowLevel: 0
     - _SnowOverlayType: 0
     - _SpecularHighlights: 1
@@ -133,7 +133,7 @@ Material:
     - _Translucency: 26.7
     - _TreeType: 0
     - _UVSec: 0
-    - _WIND: 1
+    - _WIND: 0
     - _Wind: 1
     - _WindForce: 0.379
     - _WindSpeed: 0.452
