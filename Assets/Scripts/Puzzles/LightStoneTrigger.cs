@@ -7,15 +7,14 @@ using UnityEngine;
 /// </summary>
 public class LightStoneTrigger : MonoBehaviour
 {
-    // The LightStone script
-    private LightStone ls;
-
+    private NewLightstone newLightstoneScript;
+    
     /// <summary>
     /// gets the LightStone script
     /// </summary>
     private void Start()
     {
-        ls = GetComponent<LightStone>();
+        newLightstoneScript = GetComponent<NewLightstone>();
     }
 
     /// <summary>
@@ -26,7 +25,8 @@ public class LightStoneTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("BasicMagic"))
         {
-            ls.ChangeLineActiveState();
+            //ls.ChangeLineActiveState();
+            newLightstoneScript.ChangeActivState();
         }
     }
 }
