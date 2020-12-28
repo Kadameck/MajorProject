@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class OrbStageTransition : MonoBehaviour
 {
+    [SerializeField]
+    NewLightstone serpentinLightstone;
+    [SerializeField]
+    GameObject orbitCenter;
+
+
     private OrbFollowPath oFP;
+    private float timeCounter;
+    private bool stopOrbit = false;
 
     private void Start()
     {
@@ -50,7 +58,34 @@ public class OrbStageTransition : MonoBehaviour
     /// </summary>
     private void LightstoneTransition()
     {
-        Debug.Log("Bin am Lichtstein");
+        StartCoroutine(MoveAroundLightstone());
+        //oFP.StartNextStage();
+    }
+
+    // eine eigene Update funktion die erst den orb neben dem center positioniert und anschliesend das center umrunden lässt
+    IEnumerator MoveAroundLightstone()
+    {
+        // der orb soll sich jeden frame dem center weiter nähern solange er nicht einen abstand von 2 oder weniger hat
+        while(Vector3.Distance(orbitCenter.transform.position, transform.position) >= 4.0f)
+        {
+            transform.LookAt(orbitCenter.transform.position);
+            transform.Translate(Vector3.forward * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+
+        // Wird solange ein mal pro frame ausgeführt bis der lichtstein aktiviert wurde
+        while(!stopOrbit)
+        {
+            // Rotiert den orb um einen gegebenen punkt
+            // der abstand ist dabei der radius. also wenn der orb 2 unity vom oribt enter entfernt ist, ist der radius des kreises der bei der rotation entshet 2
+            // Hier sthet also: rotiere um den orbitCenter, rotiere um die y achse, rotiere 90grad pro sekunde (also ein viertel kreis pro sekunde)
+            this.transform.RotateAround(orbitCenter.transform.position, new Vector3(0.0f, 1.0f, 0.0f), 90.0f * Time.deltaTime);
+            stopOrbit = serpentinLightstone.GetIsActive();
+            
+            yield return new WaitForEndOfFrame();
+        }
+
+        // beginnt die verfolgung der nächsten stage
         oFP.StartNextStage();
     }
 

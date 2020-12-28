@@ -73,4 +73,9 @@ public class NewLightstone : MonoBehaviour
             doorMech.DegreaseActiveLightstoneCounter();
         }
     }
+
+    public bool GetIsActive()
+    {
+        return isActiv;
+    }
 }
