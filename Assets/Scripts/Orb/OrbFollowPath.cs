@@ -77,8 +77,9 @@ public class OrbFollowPath : MonoBehaviour
     private void Update()
     {
         if(stageFinished && !transitionHasStarted) { StartStageTransition(); }
-        if(followPlayer) { FollowPlayer(); }
-        if (canStartNewCoroutine && !followPlayer && !stageFinished) { StartCoroutine(FollowPath()); }
+        // if(followPlayer) { FollowPlayer(); }
+        // if (canStartNewCoroutine && !followPlayer && !stageFinished) { StartCoroutine(FollowPath()); }
+        if (canStartNewCoroutine && !stageFinished) { StartCoroutine(FollowPath()); }
     }
 
     /// <summary>
@@ -168,32 +169,32 @@ public class OrbFollowPath : MonoBehaviour
     /// <summary>
     /// Verfolgt den spieler
     /// </summary>
-    private void FollowPlayer()
-    {
-        // Prüft ob der spieler zu weit vom orb weg ist
-        if(!CloseEnoughCheck(transform.position, player.position, 10.0f))
-        {
-            // Wenn der spieler zu weit vom orb weg ist, folgt der orb dem spieler
-            transform.LookAt(player.position);
-            transform.Translate(Vector3.forward * Time.deltaTime * (speed * 10));
-        }
-        // Wenn der spieler nah genug am orb ist...
-        else
-        {
-            // Wenn der spieler nah genug am orb ist aber der orb nicht nah genug an seiner letzten pfadposition
-            if(!CloseEnoughCheck(lastPathPosition, transform.position, 0.1f))
-            {
-                transform.LookAt(lastPathPosition);
-                // dann bewegt sich der orb zu seiner letzten pfadposition
-                transform.Translate(Vector3.forward * Time.deltaTime * (speed*10));
-            }
-            // ist der spieler nah genug am orb und der orb selbst (und somit auch der spieler) nah genug an der letzten pfadposition
-            else
-            {
-                followPlayer = false;
-            }
-        }
-    }
+  //  private void FollowPlayer()
+  //  {
+  //      // Prüft ob der spieler zu weit vom orb weg ist
+  //      if(!CloseEnoughCheck(transform.position, player.position, 10.0f))
+  //      {
+  //          // Wenn der spieler zu weit vom orb weg ist, folgt der orb dem spieler
+  //          transform.LookAt(player.position);
+  //          transform.Translate(Vector3.forward * Time.deltaTime * (speed * 10));
+  //      }
+  //      // Wenn der spieler nah genug am orb ist...
+  //      else
+  //      {
+  //          // Wenn der spieler nah genug am orb ist aber der orb nicht nah genug an seiner letzten pfadposition
+  //          if(!CloseEnoughCheck(lastPathPosition, transform.position, 0.1f))
+  //          {
+  //              transform.LookAt(lastPathPosition);
+  //              // dann bewegt sich der orb zu seiner letzten pfadposition
+  //              transform.Translate(Vector3.forward * Time.deltaTime * (speed*10));
+  //          }
+  //          // ist der spieler nah genug am orb und der orb selbst (und somit auch der spieler) nah genug an der letzten pfadposition
+  //          else
+  //          {
+  //              followPlayer = false;
+  //          }
+  //      }
+  //  }
     
     /// <summary>
     /// Welchselt zwischen stage ist beendet und stage ist nicht beendet (für die übergänge zwischen den stages)

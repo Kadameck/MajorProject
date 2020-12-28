@@ -8,13 +8,18 @@ public class Prism : MonoBehaviour
     GameObject target;
 
     private LineRenderer lineRend;
+    private Material mat;
 
-    // Start is called before the first frame update
-    void Start()
+    // Für den fall das der Lichtstein der diesem prisma hier als quelle dient bereits von anfang an aktiv ist
+    // muss dashier Awake sein. denn der lichtstein wird in der start initialisiert, sprich dieses prisma hier muss noch davor bereit sein
+    void Awake()
     {
         lineRend = GetComponent<LineRenderer>();
+        lineRend.positionCount = 2;
         lineRend.SetPosition(0, this.transform.position);
         lineRend.SetPosition(1, target.transform.position);
+        mat = GetComponent<Renderer>().material;
+        mat.DisableKeyword("_EMISSION");
     }
 
     // setzt den lichtstrahl des prismas auf den selben sichtbar/unsichtbar wert den der lichtstein bzw das andere prisma hat, von dem aus diese
@@ -22,6 +27,7 @@ public class Prism : MonoBehaviour
     // außerdem  erden die linerenderer einstellungen des lichtsteins/anderen prismas übernommen
     public void SetPrismActiveOrDeactive(LineRenderer lineRenderer, bool activeState)
     {
+
         lineRend.enabled = activeState;
 
         if(activeState)
@@ -29,6 +35,11 @@ public class Prism : MonoBehaviour
             lineRend.material = lineRenderer.material;
             lineRend.colorGradient = lineRenderer.colorGradient;
             lineRend.widthCurve = lineRenderer.widthCurve;
+            mat.EnableKeyword("_EMISSION");
+        }
+        else
+        {
+            mat.DisableKeyword("_EMISSION");
         }
 
         ActivateOrDeactivateTarget();
