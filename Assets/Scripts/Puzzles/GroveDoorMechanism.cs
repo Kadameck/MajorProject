@@ -14,6 +14,8 @@ public class GroveDoorMechanism : MonoBehaviour
 {
     [SerializeField, Tooltip("How many Lightstones have to be activ to open the door?")]
     int activLightstoneNumber;
+    [SerializeField]
+    GameObject portablePrism;
 
     private Animator anim;
     private int activeLightstoneCounter;
@@ -31,11 +33,26 @@ public class GroveDoorMechanism : MonoBehaviour
         CheckForOpeningAndClosing();
     }
 
+    private void Update()
+    {
+        // prüft ob alle lichtsteine an sind und die tür aber noch zu ist
+        // wenn dieser umstand der fall ist, dann wird jeden frame in der CheckForOpeningAndClosing() geprüft ob das
+        // bewegliche prisma plaziert wurde
+        if (activeLightstoneCounter == activLightstoneNumber && !doorIsOpen)
+        {
+            CheckForOpeningAndClosing();
+        }
+    }
+
     // Prüft ob die tür auf oder zu gehen soll
+    // wird jedes mal aufgerufen wenn sich der zustand eines lichtsteins verändert
+    // oder jeden frame sobalt genausoviele lichtsteine aktiv sind wie es sein soll und die tür noch zu ist
+    // der grund ist einfach der, das ein prisma prisma erst richtig positioniert werden muss
+    // d.h selbst wenn alle lichtsteine an sind bedeutet das nicht das die tür aufgehen soll
     private void CheckForOpeningAndClosing()
     {
         // Wenn genauso viele steine aktiv sidn wie es sein sollen und die tür nicht schon offen ist
-        if(activeLightstoneCounter == activLightstoneNumber && !doorIsOpen)
+        if(activeLightstoneCounter == activLightstoneNumber && !doorIsOpen && portablePrism.GetComponent<Prism>().GetIsPlaced())
         {
             OpenTheDoor();
         }

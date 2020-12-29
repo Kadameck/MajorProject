@@ -165,7 +165,7 @@ public class ShamanControl : MonoBehaviour
                     if (currentlyCarriedObject != null)
                     {
                         // Checks if the clicked spot is a valide one to placing something
-                        if (hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.GetComponent<SlotForSomethingPortable>() != null)
+                        if (hit.collider.gameObject.CompareTag("Ground"))
                         {
                             // Put the carried object down and resets all carring variables
                             currentlyCarriedObject.GetComponent<CarryObject>().PutDown(hit.point);

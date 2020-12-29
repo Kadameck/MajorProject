@@ -14,6 +14,8 @@ public class CarryObject : MonoBehaviour
     private bool isCarried = false;
     private bool willBePlaced = false;
 
+    private bool calledFromOnDestroy = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,9 +78,22 @@ public class CarryObject : MonoBehaviour
             // das objekt aber ihrgendwo liegt
             this.transform.SetParent(null);
         }
+
         GetComponent<Rigidbody>().useGravity = true;
         isCarried = false;
         willBePlaced = false;
         Destroy(cSphere.gameObject);
+    }
+
+    // wenn das getragene objekt ihrgendwo plaziert wird wird dieses CarryObjekt script auf dem
+    // objekt zerstört und da das getragene objekt evtl den platz den der spieler angeklickt hat nich nicht ganz erreicht hat,
+    // wird die sphere in diesem fall über diesen weg hier zerstört
+    private void OnDestroy()
+    {
+        if(cSphere != null)
+        {
+            this.transform.SetParent(null);
+            Destroy(cSphere.gameObject);
+        }
     }
 }
