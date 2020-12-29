@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 3780845906157703174}
   - component: {fileID: 6133965803601608079}
   - component: {fileID: 6315932938178824012}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacle 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,8 +225,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 15.046143, y: 10.556423, z: 4.2415466}
-  m_Center: {x: 2.328827, y: 1.3893147, z: 5.888214}
+  m_Size: {x: 13.555344, y: 14.479563, z: 4.2415466}
+  m_Center: {x: 1.5834274, y: 3.3508844, z: 5.888214}
 --- !u!65 &6315932938178824012
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -238,8 +238,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.6499481, y: 9.761059, z: 13.947128}
-  m_Center: {x: -7.0034943, y: 1.4728203, z: 0.9843521}
+  m_Size: {x: 3.6499481, y: 14.041962, z: 13.083969}
+  m_Center: {x: -7.0034943, y: 3.6132717, z: 1.4159317}
 --- !u!1 &6795505143459094799
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4224855307461646825}
   - component: {fileID: 7544834645750318289}
   - component: {fileID: 7064089967942262367}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacle 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,8 +58,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.859177, y: 7.468395, z: 5.5629344}
-  m_Center: {x: 0.00000089623927, y: 0, z: 0.2668326}
+  m_Size: {x: 1.859177, y: 12.319454, z: 5.5629344}
+  m_Center: {x: 0.00000089623927, y: 2.4255285, z: 0.2668326}
 --- !u!65 &7544834645750318289
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -71,8 +71,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.824187, y: 7.385085, z: 1.8500237}
-  m_Center: {x: 1.4753244, y: -0.000002026558, z: 3.9492397}
+  m_Size: {x: 4.824187, y: 13.010407, z: 1.8500237}
+  m_Center: {x: 1.4753244, y: 2.8126578, z: 3.9492397}
 --- !u!65 &7064089967942262367
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -84,8 +84,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.9161797, y: 7.412853, z: 1.9249663}
-  m_Center: {x: -1.554388, y: 0.041638136, z: -3.4850953}
+  m_Size: {x: 5.5675697, y: 13.195204, z: 1.9249678}
+  m_Center: {x: -1.8800852, y: 2.9328117, z: -3.485092}
 --- !u!1001 &17215478925587331
 PrefabInstance:
   m_ObjectHideFlags: 0

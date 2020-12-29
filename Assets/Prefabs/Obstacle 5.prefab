@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1735467376539646215}
   - component: {fileID: 7325076172045070810}
   m_Layer: 2
-  m_Name: LOD0
+  m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,10 +90,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4479938134005066840}
-  - component: {fileID: 6215846564588872082}
-  - component: {fileID: 2131238288829463016}
-  - component: {fileID: 6887599769572895598}
-  m_Layer: 0
+  - component: {fileID: 1068245899532868068}
+  - component: {fileID: 2766161443161429223}
+  - component: {fileID: 4246486251174858237}
+  - component: {fileID: 2755347519110159163}
+  - component: {fileID: 4894318542922513081}
+  - component: {fileID: 7324023779452235167}
+  - component: {fileID: 955758140047695576}
+  m_Layer: 8
   m_Name: Obstacle 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +129,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &6215846564588872082
+--- !u!136 &1068245899532868068
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,11 +139,11 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.364172
-  m_Height: 7.541359
-  m_Direction: 0
-  m_Center: {x: 0.5472832, y: 0, z: 0.3747921}
---- !u!136 &2131238288829463016
+  m_Radius: 1.1001205
+  m_Height: 13.657728
+  m_Direction: 1
+  m_Center: {x: 3.0894032, y: 3.5950308, z: -4.578575}
+--- !u!136 &2766161443161429223
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,11 +153,11 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.1379061
-  m_Height: 7.37912
-  m_Direction: 2
-  m_Center: {x: -2.0226393, y: 0, z: -2.2093506}
---- !u!136 &6887599769572895598
+  m_Radius: 1.1001205
+  m_Height: 13.657728
+  m_Direction: 1
+  m_Center: {x: 3.0894032, y: 3.5950308, z: 0.72}
+--- !u!136 &4246486251174858237
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,10 +167,63 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.2157059
-  m_Height: 7.0679474
-  m_Direction: 2
-  m_Center: {x: 3.1428757, y: 0, z: -2.131569}
+  m_Radius: 1.1001205
+  m_Height: 13.657728
+  m_Direction: 1
+  m_Center: {x: -2.28, y: 3.5950308, z: 0.71}
+--- !u!136 &2755347519110159163
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6600335374882444261}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.2500392
+  m_Height: 13.657728
+  m_Direction: 1
+  m_Center: {x: -2.0899189, y: 3.5950308, z: -4.578575}
+--- !u!65 &4894318542922513081
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6600335374882444261}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.3211136, y: 13.258532, z: 2.763733}
+  m_Center: {x: 0.39683914, y: 3.639905, z: 0.4585724}
+--- !u!65 &7324023779452235167
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6600335374882444261}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5168, y: 13.321294, z: 5.3210754}
+  m_Center: {x: -2.0988235, y: 3.6294475, z: -1.9312592}
+--- !u!65 &955758140047695576
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6600335374882444261}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2169647, y: 12.83869, z: 5.3034515}
+  m_Center: {x: 3.0953293, y: 3.8692846, z: -1.904808}
 --- !u!1001 &593519003896294113
 PrefabInstance:
   m_ObjectHideFlags: 0

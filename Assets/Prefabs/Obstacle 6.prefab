@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3366261403936558654}
   - component: {fileID: 6944030274806505825}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacle 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,8 +59,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.352585, y: 4.6410694, z: 6.8905487}
-  m_Center: {x: 0.3362198, y: 0, z: 0.06725311}
+  m_Size: {x: 6.352585, y: 13.9986315, z: 6.8905487}
+  m_Center: {x: 0.3362198, y: 4.678781, z: 0.06725312}
 --- !u!1001 &327014680968299207
 PrefabInstance:
   m_ObjectHideFlags: 0

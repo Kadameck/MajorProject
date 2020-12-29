@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8634871199961081299}
-  m_Layer: 0
+  - component: {fileID: 1315258884090652160}
+  m_Layer: 8
   m_Name: Obstacle 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,6 +35,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1315258884090652160
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7138497809996620778}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 3.804245
+  m_Height: 21.599585
+  m_Direction: 1
+  m_Center: {x: 1.6300888, y: 4.9870234, z: -1.4228058}
 --- !u!1001 &2481756183668585718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -184,6 +199,10 @@ PrefabInstance:
     - target: {fileID: 4655554399499489375, guid: 3b54291338335ae48b5f5b5f3b6eb606, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655554399499489375, guid: 3b54291338335ae48b5f5b5f3b6eb606, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8556984253747454540, guid: 3b54291338335ae48b5f5b5f3b6eb606, type: 3}
       propertyPath: m_LocalPosition.x
