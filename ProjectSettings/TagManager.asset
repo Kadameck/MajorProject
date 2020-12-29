@@ -13,6 +13,7 @@ TagManager:
   - Prisma
   - Mechanism
   - CarrySphere
+  - ObstacleTree
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - Unselectable
   - LightIgnore
   - AoE_Visualisation
-  - 
+  - Cam2Ignore
   - 
   - 
   - 
