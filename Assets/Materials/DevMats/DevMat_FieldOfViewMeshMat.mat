@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: DevMat_FieldOfViewMeshMat
-  m_Shader: {fileID: 4800000, guid: b96dd0c0c6c69fe44ba80cffc729ab28, type: 3}
+  m_Shader: {fileID: 4800000, guid: a6a8c96b2dd794a4ca6c8b5fae1c1dab, type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
