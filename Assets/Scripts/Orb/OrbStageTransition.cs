@@ -8,8 +8,10 @@ public class OrbStageTransition : MonoBehaviour
     NewLightstone serpentinLightstone;
     [SerializeField]
     GameObject orbitCenter;
+    [SerializeField]
+    Transform stageTwoContainerOneWP;
 
-
+    private bool moveToStage2 = false;
     private OrbFollowPath oFP;
     private float timeCounter;
     private bool stopOrbit = false;
@@ -69,7 +71,7 @@ public class OrbStageTransition : MonoBehaviour
         while(Vector3.Distance(orbitCenter.transform.position, transform.position) >= 4.0f)
         {
             transform.LookAt(orbitCenter.transform.position);
-            transform.Translate(Vector3.forward * Time.deltaTime);
+            transform.Translate(Vector3.forward * Time.deltaTime * 4);
             yield return new WaitForEndOfFrame();
         }
 
@@ -78,10 +80,21 @@ public class OrbStageTransition : MonoBehaviour
         {
             // Rotiert den orb um einen gegebenen punkt
             // der abstand ist dabei der radius. also wenn der orb 2 unity vom oribt enter entfernt ist, ist der radius des kreises der bei der rotation entshet 2
-            // Hier sthet also: rotiere um den orbitCenter, rotiere um die y achse, rotiere 90grad pro sekunde (also ein viertel kreis pro sekunde)
-            this.transform.RotateAround(orbitCenter.transform.position, new Vector3(0.0f, 1.0f, 0.0f), 90.0f * Time.deltaTime);
+            // Hier sthet also: rotiere um den orbitCenter, rotiere um die y achse, rotiere 180grad pro sekunde (also ein halber kreis pro sekunde)
+            this.transform.RotateAround(orbitCenter.transform.position, new Vector3(0.0f, 1.0f, 0.0f), 180.0f * Time.deltaTime);
             stopOrbit = serpentinLightstone.GetIsActive();
             
+            yield return new WaitForEndOfFrame();
+        }
+
+
+        //moveToStage2 = true;
+
+        // Bewegt sich auf die position des ersten waypoints des ersten containers in stage 2 zu
+        while(Vector3.Distance(stageTwoContainerOneWP.position, transform.position) >= 1.0f)
+        {
+            transform.LookAt(stageTwoContainerOneWP.position);
+            transform.Translate(Vector3.forward * Time.deltaTime * 8);
             yield return new WaitForEndOfFrame();
         }
 

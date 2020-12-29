@@ -225,48 +225,48 @@ public class OrbFollowPath : MonoBehaviour
         stageNumb++;
         InitStage(stageNumb);
     }
-    private void OnDrawGizmos()
-    {
-        gizmoPositions.Clear();
-        c = 0;
-   
-        if (pathContainer.Count == 0)
-        {
-            // Loopt durch die child (also container) des ersten stage
-            for (int stageChilds = 0; stageChilds < stages[0].transform.childCount; stageChilds++)
-            {
-                pathContainer.Add(stages[3].transform.GetChild(stageChilds).gameObject);
-            }
-        }
-   
-        for (int container = 0; container < pathContainer.Count; container++)
-        {
-            // Loopt durch die Childobjekte des pathcontainers
-            for (int waypoint = 0; waypoint < pathContainer[container].transform.childCount; waypoint++)
-            {
-                gizmoPositions.Add(pathContainer[container].transform.GetChild(waypoint).position);
-            }
-   
-            for (float i = 0; i <= 1; i += 0.05f)
-            {
-                gizmoPos = Mathf.Pow(1 - i, 3) * gizmoPositions[c] +
-                           3 * Mathf.Pow(1 - i, 2) * i * gizmoPositions[c + 1] +
-                           3 * (1 - i) * Mathf.Pow(i, 2) * gizmoPositions[c + 2] +
-                           Mathf.Pow(i, 3) * gizmoPositions[c + 3];
-   
-                Gizmos.color = Color.magenta;
-                Gizmos.DrawSphere(gizmoPos, 0.25f);
-   
-            }
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(gizmoPositions[c], gizmoPositions[c + 1]);
-            Gizmos.DrawLine(gizmoPositions[c + 2], gizmoPositions[c+ 3]);
-   
-            Gizmos.color = Color.blue;
-            Gizmos.DrawSphere(gizmoPositions[c + 1], 0.75f);
-            Gizmos.DrawSphere(gizmoPositions[c + 2], 0.75f);
-            
-            c += 4;
-        }
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    gizmoPositions.Clear();
+    //    c = 0;
+    //
+    //    if (pathContainer.Count == 0)
+    //    {
+    //        // Loopt durch die child (also container) des ersten stage
+    //        for (int stageChilds = 0; stageChilds < stages[0].transform.childCount; stageChilds++)
+    //        {
+    //            pathContainer.Add(stages[0].transform.GetChild(stageChilds).gameObject);
+    //        }
+    //    }
+    //
+    //    for (int container = 0; container < pathContainer.Count; container++)
+    //    {
+    //        // Loopt durch die Childobjekte des pathcontainers
+    //        for (int waypoint = 0; waypoint < pathContainer[container].transform.childCount; waypoint++)
+    //        {
+    //            gizmoPositions.Add(pathContainer[container].transform.GetChild(waypoint).position);
+    //        }
+    //
+    //        for (float i = 0; i <= 1; i += 0.05f)
+    //        {
+    //            gizmoPos = Mathf.Pow(1 - i, 3) * gizmoPositions[c] +
+    //                       3 * Mathf.Pow(1 - i, 2) * i * gizmoPositions[c + 1] +
+    //                       3 * (1 - i) * Mathf.Pow(i, 2) * gizmoPositions[c + 2] +
+    //                       Mathf.Pow(i, 3) * gizmoPositions[c + 3];
+    //
+    //            Gizmos.color = Color.magenta;
+    //            Gizmos.DrawSphere(gizmoPos, 0.25f);
+    //
+    //        }
+    //        Gizmos.color = Color.red;
+    //        Gizmos.DrawLine(gizmoPositions[c], gizmoPositions[c + 1]);
+    //        Gizmos.DrawLine(gizmoPositions[c + 2], gizmoPositions[c+ 3]);
+    //
+    //        Gizmos.color = Color.blue;
+    //        Gizmos.DrawSphere(gizmoPositions[c + 1], 0.75f);
+    //        Gizmos.DrawSphere(gizmoPositions[c + 2], 0.75f);
+    //        
+    //        c += 4;
+    //    }
+    //}
 }
