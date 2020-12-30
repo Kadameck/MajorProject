@@ -86,12 +86,12 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Color2Enable: 1
-    - _Color2Fade: 0.28
+    - _Color2Fade: 1
     - _Color2Int: 0.3
     - _Color2Level: -1.1
     - _Color2OverlayType: 0
     - _Color2Power: 3.25
-    - _Cutoff: 0.25
+    - _Cutoff: 0.172
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Fixthebaseoffoliage: 0
@@ -105,7 +105,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SNOW: 0
-    - _Smoothness: 0.1
+    - _Smoothness: 0.115
     - _SmoothnessTextureChannel: 0
     - _Snow: 0
     - _SnowAmount: 0.4
@@ -131,8 +131,8 @@ Material:
     - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1: {r: 0.039999988, g: 0.4, b: 0.07272723, a: 0}
-    - _Color2: {r: 0.3715646, g: 0.67058825, b: 0, a: 0}
+    - _Color1: {r: 0, g: 0.4245283, b: 0.41585898, a: 0}
+    - _Color2: {r: 0.7169812, g: 0.6349584, b: 0.02367392, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SnowColor: {r: 1, g: 0.7400185, b: 0, a: 0}
   m_BuildTextureStacks: []
