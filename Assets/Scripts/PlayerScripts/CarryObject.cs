@@ -14,12 +14,11 @@ public class CarryObject : MonoBehaviour
     private bool isCarried = false;
     private bool willBePlaced = false;
 
-    private bool calledFromOnDestroy = false;
-
     // Start is called before the first frame update
     void Start()
     {
         normalParent = GameObject.FindGameObjectWithTag("TerrainHolder");
+        transform.SetParent(normalParent.transform);
     }
 
     private void Update()
