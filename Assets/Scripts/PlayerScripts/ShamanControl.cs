@@ -35,6 +35,7 @@ public class ShamanControl : MonoBehaviour
     private bool puttDownSomething = false;
     private GameObject currentMagicBall;
     private GameObject currentlyCarriedObject;
+    private bool pushingSomething = false;
 
     // Awake is called at the spawn of the object
     void Awake()
@@ -74,7 +75,7 @@ public class ShamanControl : MonoBehaviour
                     PlayerRotation(targetDir);
 
                     // Checks if the player should sneak
-                    if (Sneak())
+                    if (Sneak() || pushingSomething)
                     {
                         // Moves the player in sneak speed
                         rb.velocity = new Vector3(xMove, yDirect, zMove) * sneakSpeed * Time.deltaTime;
@@ -342,5 +343,20 @@ public class ShamanControl : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         puttDownSomething = false;
+    }
+
+    public bool GetPushSomething()
+    {
+        return pushingSomething;
+    }
+
+    public void SetPushingSomething()
+    {
+        pushingSomething = !pushingSomething;
+    }
+
+    public bool GetIsGrounded()
+    {
+        return GroundScan();
     }
 }

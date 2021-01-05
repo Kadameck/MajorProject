@@ -28,13 +28,20 @@ public class ClimbingSpot : MonoBehaviour
                upKey == 'd' && Input.GetKey(KeyCode.D) ||
                upKey == 'a' && Input.GetKey(KeyCode.A))
             {
-                child.transform.Translate(Vector3.up * 0.1f);
+                    child.transform.Translate(Vector3.up * 0.3f);
             }
             else if (downKey == 'w' && Input.GetKey(KeyCode.S) ||
                     downKey == 'd' && Input.GetKey(KeyCode.D) ||
                     downKey == 'a' && Input.GetKey(KeyCode.A))
             {
-                child.transform.Translate(Vector3.down * 0.1f);
+                if (!child.GetComponent<ShamanControl>().GetIsGrounded())
+                {
+                    child.transform.Translate(Vector3.down * 0.3f);
+                }
+                else
+                {
+                    SetPlayerFree();
+                }
             }
         }
     }
@@ -43,16 +50,16 @@ public class ClimbingSpot : MonoBehaviour
     /// Initialised the climbing skill
     /// </summary>
     /// <param name="other">Obj in Trigger</param>
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         // Checks whether the object that enters the trigger is the player, whether the player was climbing just short before and whether he is coming from above or below
         if (other.gameObject.CompareTag("Player")&& other.transform.position.y < transform.position.y)
         {
             // Blocks the normal player movement
-            other.GetComponent<ShamanControl>().isClimbing = true;
-            other.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            other.gameObject.GetComponent<ShamanControl>().isClimbing = true;
+            other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             // Prefents the player from falling
-            other.GetComponent<Rigidbody>().useGravity = false;
+            other.gameObject.GetComponent<Rigidbody>().useGravity = false;
             // Sets the player as child obj from the climbingSpot
             other.transform.SetParent(this.transform);
             // Stores the player to move him in Update()
@@ -65,17 +72,24 @@ public class ClimbingSpot : MonoBehaviour
     /// Resets the player
     /// </summary>
     /// <param name="other">Obj in Target</param>
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionExit(Collision other)
     {
         // Checks if the obj that is leaving the trigger is the player
         if(other.gameObject.CompareTag("Player"))
         {
-            // Resetzt all Player Inputs and properties
-            other.GetComponent<ShamanControl>().isClimbing = false;
-            other.transform.SetParent(null);
-            other.GetComponent<Rigidbody>().useGravity = true;
+            SetPlayerFree();
+        }
+    }
+
+    private void SetPlayerFree()
+    {
+        if (child != null)
+        {
+            child.gameObject.GetComponent<ShamanControl>().isClimbing = false;
+            child.transform.SetParent(null);
+            child.gameObject.GetComponent<Rigidbody>().useGravity = true;
             // Push the player a little to prevent them from falling back into the trigger
-            other.GetComponent<Rigidbody>().AddForce((Vector3.up + other.transform.forward) * 1000, ForceMode.Impulse);
+            child.gameObject.GetComponent<Rigidbody>().AddForce((Vector3.up + child.transform.forward) * 1000, ForceMode.Impulse);
             // Reset Variables
             child = null;
         }
