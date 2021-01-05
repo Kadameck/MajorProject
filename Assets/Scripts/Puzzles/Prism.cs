@@ -7,6 +7,9 @@ public class Prism : MonoBehaviour
     [SerializeField]
     GameObject target;
 
+    [SerializeField, Tooltip("Muss nur gegeben sein wenn das eigentliche target bewegtlich ist.")]
+    GameObject alternativTarget;
+
     private bool isPlaced = false;
     private bool targetIsMovable = false;
     private bool waitForPlaceTarget = false;
@@ -46,6 +49,12 @@ public class Prism : MonoBehaviour
                 // es wird nicht mehr auf die platzierung des target prismas gewartet und das target prisma kann aktiviert werden
                 waitForPlaceTarget = false;
                 ActivateOrDeactivateTarget();
+            }
+            // ist das targetprisma noch nicht plaziert und noch kein  ziel als endpunkt für den strahl gesetzt
+            else if(lineRend.GetPosition(1) == this.transform.position)
+            {
+                // setzte das alternative ziel, als ziel
+                lineRend.SetPosition(1, alternativTarget.transform.position);
             }
         }
     }

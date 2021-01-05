@@ -284,6 +284,7 @@ public class ShamanControl : MonoBehaviour
 
         return false;
     }
+
     public bool GetUseMagic()
     {
         return useMagic;

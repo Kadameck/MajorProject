@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8275463349573804876}
   - component: {fileID: 8313451792738791131}
   - component: {fileID: 9136823393723505914}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: MagicPlaceholder
   m_TagString: BasicMagic
   m_Icon: {fileID: 0}
