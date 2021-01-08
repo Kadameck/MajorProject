@@ -4,26 +4,35 @@ using UnityEngine;
 
 public class WolfFollowPlayer : MonoBehaviour
 {
+    // Das Objekt dem gefolgt werden soll
+    [SerializeField]
+    GameObject target;
+    // Ab welchen Abstand soll der Follower stehen bleiben sich weiter dem Target zu nähern
+    [SerializeField]
+    float minDistance = 5;
+    // Wie schnell bewegt sich der Follower
+    [SerializeField]
+    float speed;
 
-    private Transform player;
+    // Die momentane entfehrnung zwischen follower und target
+    private float targetDistance;
     private Animator anim;
-    private Rigidbody rb;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        anim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
+        anim = this.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(Vector3.Distance(player.position, transform.position) > 5f)
+        // Dreht den Follower so dass er zum spieler sieht
+        transform.LookAt(target.transform.position);
+
+        targetDistance = Vector3.Distance(transform.position, target.transform.position);
+
+        if (targetDistance >= minDistance)
         {
-            transform.LookAt(player.position);
-            transform.position = Vector3.Lerp(transform.position, player.position, Time.deltaTime * 3);
+            anim.SetFloat("RunSpeed", Time.deltaTime * speed);
             anim.SetBool("walk", true);
         }
         else
