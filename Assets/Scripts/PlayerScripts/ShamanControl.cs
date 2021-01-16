@@ -365,11 +365,27 @@ public class ShamanControl : MonoBehaviour
     public void SetPushingSomething()
     {
         pushingSomething = !pushingSomething;
+
+        if(pushingSomething)
+        {
+            anim.SetBool("Push", true);
+            anim.SetFloat("StartEndPush", 2.0f);
+        }
+        else
+        {
+            anim.SetBool("Push", false);
+            anim.SetFloat("StartEndPush", -2.0f);
+        }
     }
 
     public bool GetIsGrounded()
     {
         return grounded; //GroundScan();
+    }
+
+    public Animator GetAnimator()
+    {
+        return anim;
     }
 
     private void OnTriggerStay(Collider other)
