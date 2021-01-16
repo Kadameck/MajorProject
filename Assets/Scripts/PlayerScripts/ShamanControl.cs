@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class ShamanControl : MonoBehaviour
 {
+    [SerializeField, Tooltip("Character Animator Component")]
+    Animator anim;
     [SerializeField]
     float sneakSpeed = 150;
     [SerializeField]
@@ -38,7 +40,6 @@ public class ShamanControl : MonoBehaviour
     private bool pushingSomething = false;
 
     private bool grounded;
-
     // Awake is called at the spawn of the object
     void Awake()
     {
@@ -86,9 +87,14 @@ public class ShamanControl : MonoBehaviour
                     {
                         // Moves the player normal speed
                         rb.velocity = new Vector3(xMove, yDirect, zMove) * walkSpeed * Time.deltaTime;
+                        anim.SetBool("Walk", true);
                     }
                     // Drops the player
                     rb.velocity += new Vector3(0.0f, -1.0f, 0.0f);
+                }
+                else
+                {
+                    anim.SetBool("Walk", false);
                 }
             }
             else
@@ -192,6 +198,7 @@ public class ShamanControl : MonoBehaviour
             useMagic = false;
             Destroy(currentMagicBall);
             currentMagicBall = null;
+            anim.SetBool("Magic", false);
         }
 
         // Checks if the player does a left click and the basic Magic skill doesn't have a cooldown currently
@@ -235,6 +242,7 @@ public class ShamanControl : MonoBehaviour
                         useMagic = false;
                         SUAVisualisation.enabled = false;
                         canUsebasicMagic = false;
+                        anim.SetBool("Magic", false);
 
                         // Starts a magic usable cooldown
                         StartCoroutine(BasicMagicCooldown());
@@ -248,7 +256,7 @@ public class ShamanControl : MonoBehaviour
             // Resets everything to no "magic not active"
             useMagic = false;
             SUAVisualisation.enabled = false;
-
+            anim.SetBool("Magic", false);
             // Destry the unused magic ball
             Destroy(currentMagicBall);
         }
@@ -298,6 +306,7 @@ public class ShamanControl : MonoBehaviour
     /// <returns></returns>
     IEnumerator ActivateSkillUseArea()
     {
+        anim.SetBool("Magic", true);
         yield return new WaitForEndOfFrame();
         useMagic = true;
         SUAVisualisation.enabled = true;
