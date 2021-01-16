@@ -37,6 +37,8 @@ public class ShamanControl : MonoBehaviour
     private GameObject currentlyCarriedObject;
     private bool pushingSomething = false;
 
+    private bool grounded;
+
     // Awake is called at the spawn of the object
     void Awake()
     {
@@ -60,7 +62,7 @@ public class ShamanControl : MonoBehaviour
         // Checks if the normal Movement should be executed or if the player is climbing
         if (!isClimbing)
         {
-            if(GroundScan())
+            if(grounded)//GroundScan())
             {
                 if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
                 {
@@ -358,6 +360,22 @@ public class ShamanControl : MonoBehaviour
 
     public bool GetIsGrounded()
     {
-        return GroundScan();
+        return grounded; //GroundScan();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.CompareTag("Ground") && grounded == false)
+        {
+            grounded = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.CompareTag("Ground"))
+        {
+            grounded = false;
+        }
     }
 }

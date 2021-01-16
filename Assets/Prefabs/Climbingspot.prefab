@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 2503688159840243370}
   m_Layer: 0
   m_Name: Climbingspot
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 380419175}
   m_Layer: 0
   m_Name: Trigger
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -871,6 +871,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2503688159840243370}
     m_Modifications:
+    - target: {fileID: 968871190775588053, guid: cbab5a58565b5d44cb5a05cb2e8bd37d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 5828755407361979027, guid: cbab5a58565b5d44cb5a05cb2e8bd37d, type: 3}
       propertyPath: m_Name
       value: AN_Cliff_2 (1)
