@@ -58,6 +58,9 @@ public class WolfAwake : MonoBehaviour
             {
                 // Wird er genau auf den gewünschten Platz gesezt und ie While schleife wird beendet
                 player.transform.position = playerPos.position;
+                player.GetComponent<ShamanControl>().GetAnimator().SetBool("Walk", false);
+                player.GetComponent<ShamanControl>().GetAnimator().SetBool("Push", false);
+                player.GetComponent<ShamanControl>().GetAnimator().SetBool("Magic", false);
                 moving = false;
             }
 

@@ -50,6 +50,7 @@ public class ShamanControl : MonoBehaviour
     // FixedUpdate is called regularly at a fixed interval
     void FixedUpdate()
     {
+        Debug.Log(grounded);
         Movement();
         Interact();
     }
@@ -383,24 +384,13 @@ public class ShamanControl : MonoBehaviour
         return grounded; //GroundScan();
     }
 
+    public void SetGrounded(bool value)
+    {
+        grounded = value;
+    }
+
     public Animator GetAnimator()
     {
         return anim;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if(other.gameObject.CompareTag("Ground") && grounded == false)
-        {
-            grounded = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject.CompareTag("Ground"))
-        {
-            grounded = false;
-        }
     }
 }
