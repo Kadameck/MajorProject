@@ -50,7 +50,7 @@ public class ShamanControl : MonoBehaviour
     // FixedUpdate is called regularly at a fixed interval
     void FixedUpdate()
     {
-        Debug.Log(grounded);
+        Debug.Log(GroundScan());
         Movement();
         Interact();
     }
@@ -64,7 +64,7 @@ public class ShamanControl : MonoBehaviour
         // Checks if the normal Movement should be executed or if the player is climbing
         if (!isClimbing)
         {
-            if(grounded)//GroundScan())
+            if(GroundScan())
             {
                 if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
                 {
@@ -381,13 +381,13 @@ public class ShamanControl : MonoBehaviour
 
     public bool GetIsGrounded()
     {
-        return grounded; //GroundScan();
+        return GroundScan();
     }
 
-    public void SetGrounded(bool value)
-    {
-        grounded = value;
-    }
+   // public void SetGrounded(bool value)
+   // {
+   //     grounded = value;
+   // }
 
     public Animator GetAnimator()
     {
