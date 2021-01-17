@@ -31,6 +31,7 @@ public class OrbFollowPath : MonoBehaviour
     private bool stageFinished = false;
     private bool transitionHasStarted = false;
     private int stageNumb;
+    private bool firstStage = true;
 
     // Start is called before the first frame update
     void Start()
@@ -124,6 +125,11 @@ public class OrbFollowPath : MonoBehaviour
 
             if (iterator + 3 > positions.Count - 1)
             {
+                if(firstStage)
+                {
+                    firstStage = false;
+                }
+
                 SetStageFinished();
                 iterator = 0;
             }
@@ -145,7 +151,7 @@ public class OrbFollowPath : MonoBehaviour
     /// <returns>Is the player close enough to the orb?</returns>
     private bool CloseEnoughCheck(Vector3 controllPosA, Vector3 controllPosB, float maxDistance)
     {
-        if(Vector3.Distance(controllPosA, controllPosB) <= maxDistance)
+        if(Vector3.Distance(controllPosA, controllPosB) <= maxDistance || firstStage)
         {
             return true;
         }

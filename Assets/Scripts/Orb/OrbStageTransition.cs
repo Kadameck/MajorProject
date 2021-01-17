@@ -10,6 +10,8 @@ public class OrbStageTransition : MonoBehaviour
     GameObject orbitCenter;
     [SerializeField]
     Transform stageTwoContainerOneWP;
+    [SerializeField]
+    ShamanControl player;
 
     private bool moveToStage2 = false;
     private OrbFollowPath oFP;
@@ -24,22 +26,26 @@ public class OrbStageTransition : MonoBehaviour
     /// <summary>
     /// Starts the right transition
     /// </summary>
-    /// <param name="stageIndex">1 = </param>
+    /// <param name="stageIndex"></param>
     public void StartTransition(int stageIndex)
     {
         if(stageIndex == 0)
         {
-            LightstoneTransition();
+            BeginnigTransition();
         }
-        else if (stageIndex == 1)
+        else if(stageIndex == 1)
         {
-            RiverTransition();
+            LightstoneTransition();
         }
         else if (stageIndex == 2)
         {
-            MissingPrismTransition();
+            RiverTransition();
         }
         else if (stageIndex == 3)
+        {
+            MissingPrismTransition();
+        }
+        else if (stageIndex == 4)
         {
             GroveTransition();
         }
@@ -53,7 +59,14 @@ public class OrbStageTransition : MonoBehaviour
      *                                                                                                                                                                          *
      *             In den XYZTransition Funktionen können jetzt die verhalten programmiert werden die der orb haben soll ehe er in die nächste stage welchselt                  *
      *                                                                                                                                                                          *
-     ***************************************************************************************************************************************************************************/ 
+     ***************************************************************************************************************************************************************************/
+
+    private void BeginnigTransition()
+    {
+        Debug.Log("Spieler gehollt");
+        player.MakeControlable();
+        oFP.StartNextStage();
+    }
 
     /// <summary>
     /// The Orb is now at the serpentin Lightstone

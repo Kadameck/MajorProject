@@ -38,8 +38,9 @@ public class ShamanControl : MonoBehaviour
     private GameObject currentMagicBall;
     private GameObject currentlyCarriedObject;
     private bool pushingSomething = false;
-
     private bool grounded;
+    private bool controlable = false;
+
     IEnumerator lGC = null;
 
     // Awake is called at the spawn of the object
@@ -52,11 +53,18 @@ public class ShamanControl : MonoBehaviour
     // FixedUpdate is called regularly at a fixed interval
     void FixedUpdate()
     {
-        GroundScan();
-        Movement();
-        Interact();
+        if (controlable)
+        {
+            GroundScan();
+            Movement();
+            Interact();
+        }
     }
 
+    public void MakeControlable()
+    {
+        controlable = true;
+    }
 
     /// <summary>
     /// Controlls the player movement
