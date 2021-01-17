@@ -12,6 +12,7 @@ public class CameraBehaviour : MonoBehaviour
     Transform orb;
 
     private bool playerControlable = false;
+    private bool camInPos = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +30,7 @@ public class CameraBehaviour : MonoBehaviour
             transform.position = new Vector3(cameraPosition.x + target.position.x, cameraPosition.y + target.position.y, -cameraPosition.z + target.position.z);
             transform.LookAt(target.position);
         }
-        else
+        else if(!playerControlable && !camInPos)
         {
             // Let the camera follow the orb movement in a certain zoom distance
             transform.position = new Vector3(cameraPosition.x + orb.position.x, cameraPosition.y + orb.position.y, -cameraPosition.z + orb.position.z);

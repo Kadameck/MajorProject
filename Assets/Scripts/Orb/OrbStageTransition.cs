@@ -12,10 +12,10 @@ public class OrbStageTransition : MonoBehaviour
     Transform stageTwoContainerOneWP;
     [SerializeField]
     ShamanControl player;
+    [SerializeField]
+    Transform mainCamera;
 
-    private bool moveToStage2 = false;
     private OrbFollowPath oFP;
-    private float timeCounter;
     private bool stopOrbit = false;
 
     private void Start()
@@ -63,7 +63,6 @@ public class OrbStageTransition : MonoBehaviour
 
     private void BeginnigTransition()
     {
-        Debug.Log("Spieler gehollt");
         player.MakeControlable();
         oFP.StartNextStage();
     }
