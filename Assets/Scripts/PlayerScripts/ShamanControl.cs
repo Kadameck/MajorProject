@@ -384,11 +384,6 @@ public class ShamanControl : MonoBehaviour
         return GroundScan();
     }
 
-   // public void SetGrounded(bool value)
-   // {
-   //     grounded = value;
-   // }
-
     public Animator GetAnimator()
     {
         return anim;
