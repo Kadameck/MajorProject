@@ -32,6 +32,7 @@ public class OrbFollowPath : MonoBehaviour
     private bool transitionHasStarted = false;
     private int stageNumb;
     private bool firstStage = true;
+    private bool fadeIsDestroyed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -77,10 +78,18 @@ public class OrbFollowPath : MonoBehaviour
 
     private void Update()
     {
-        if(stageFinished && !transitionHasStarted) { StartStageTransition(); }
-        // if(followPlayer) { FollowPlayer(); }
-        // if (canStartNewCoroutine && !followPlayer && !stageFinished) { StartCoroutine(FollowPath()); }
-        if (canStartNewCoroutine && !stageFinished) { StartCoroutine(FollowPath()); }
+        if (fadeIsDestroyed)
+        {
+            if (stageFinished && !transitionHasStarted) { StartStageTransition(); }
+            // if(followPlayer) { FollowPlayer(); }
+            // if (canStartNewCoroutine && !followPlayer && !stageFinished) { StartCoroutine(FollowPath()); }
+            if (canStartNewCoroutine && !stageFinished) { StartCoroutine(FollowPath()); }
+        }
+    }
+
+    public void SetFadeIsDestroyed()
+    {
+        fadeIsDestroyed = true;
     }
 
     /// <summary>
