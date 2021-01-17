@@ -8,6 +8,10 @@ public class CameraBehaviour : MonoBehaviour
 
     [SerializeField]
     Vector3 cameraPosition;
+    [SerializeField]
+    Transform orb;
+
+    private bool playerControlable = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,8 +23,22 @@ public class CameraBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Let the camera follow the palyer movement in a certain zoom distance
-        transform.position = new Vector3(cameraPosition.x + target.position.x, cameraPosition.y + target.position.y, -cameraPosition.z + target.position.z);
-        transform.LookAt(target.position);
+        if (playerControlable)
+        {
+            // Let the camera follow the palyer movement in a certain zoom distance
+            transform.position = new Vector3(cameraPosition.x + target.position.x, cameraPosition.y + target.position.y, -cameraPosition.z + target.position.z);
+            transform.LookAt(target.position);
+        }
+        else
+        {
+            // Let the camera follow the orb movement in a certain zoom distance
+            transform.position = new Vector3(cameraPosition.x + orb.position.x, cameraPosition.y + orb.position.y, -cameraPosition.z + orb.position.z);
+            transform.LookAt(orb.position);
+        }
+    }
+
+    public void SetPlayerControlableTrue()
+    {
+        playerControlable = true;
     }
 }

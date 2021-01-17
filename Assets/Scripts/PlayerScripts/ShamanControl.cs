@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class ShamanControl : MonoBehaviour
 {
+    [SerializeField]
+    CameraBehaviour mainCamera;
     [SerializeField, Tooltip("Character Animator Component")]
     Animator anim;
     [SerializeField]
@@ -63,6 +65,7 @@ public class ShamanControl : MonoBehaviour
 
     public void MakeControlable()
     {
+        mainCamera.SetPlayerControlableTrue();
         controlable = true;
     }
 
