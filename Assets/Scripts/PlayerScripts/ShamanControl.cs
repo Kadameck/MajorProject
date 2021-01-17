@@ -40,6 +40,8 @@ public class ShamanControl : MonoBehaviour
     private bool pushingSomething = false;
 
     private bool grounded;
+    IEnumerator lGC = null;
+
     // Awake is called at the spawn of the object
     void Awake()
     {
@@ -50,7 +52,7 @@ public class ShamanControl : MonoBehaviour
     // FixedUpdate is called regularly at a fixed interval
     void FixedUpdate()
     {
-        Debug.Log(GroundScan());
+        GroundScan();
         Movement();
         Interact();
     }
@@ -64,7 +66,7 @@ public class ShamanControl : MonoBehaviour
         // Checks if the normal Movement should be executed or if the player is climbing
         if (!isClimbing)
         {
-            if(GroundScan())
+            if(grounded) //GroundScan())
             {
                 if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
                 {
@@ -281,7 +283,7 @@ public class ShamanControl : MonoBehaviour
     /// Scans the area under the players position and determines if it is walkable ground
     /// </summary>
     /// <returns>walkability</returns>
-    private bool GroundScan()
+    private void GroundScan()
     {
         RaycastHit hit;
 
@@ -290,10 +292,23 @@ public class ShamanControl : MonoBehaviour
         {
             // Calculates the y direction value of the movement on the current ground
             yDirect = Vector3.Cross(hit.normal, transform.TransformDirection(Vector3.left)).y;
-            return true;
+
+            if(lGC != null)
+            {
+                StopCoroutine(lGC);
+                lGC = null;
+            }
+
+            grounded = true;
+            //return true;
         }
 
-        return false;
+        if(lGC == null)
+        {
+            lGC = LostGroundContact();
+            StartCoroutine(lGC);
+        }
+        //return false;
     }
 
     public bool GetUseMagic()
@@ -381,11 +396,17 @@ public class ShamanControl : MonoBehaviour
 
     public bool GetIsGrounded()
     {
-        return GroundScan();
+        return grounded;
     }
 
     public Animator GetAnimator()
     {
         return anim;
+    }
+
+    private IEnumerator LostGroundContact()
+    {
+        yield return new WaitForSeconds(0.2f);
+        grounded = false;
     }
 }

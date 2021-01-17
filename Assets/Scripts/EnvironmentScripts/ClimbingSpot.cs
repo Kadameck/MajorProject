@@ -28,7 +28,7 @@ public class ClimbingSpot : MonoBehaviour
                upKey == 'd' && Input.GetKey(KeyCode.D) ||
                upKey == 'a' && Input.GetKey(KeyCode.A))
             {
-                    child.transform.Translate(Vector3.up * 0.3f);
+                    child.transform.Translate(Vector3.up * 0.1f);
             }
             else if (downKey == 'w' && Input.GetKey(KeyCode.S) ||
                     downKey == 'd' && Input.GetKey(KeyCode.D) ||
@@ -36,7 +36,7 @@ public class ClimbingSpot : MonoBehaviour
             {
                 if (!child.GetComponent<ShamanControl>().GetIsGrounded())
                 {
-                    child.transform.Translate(Vector3.down * 0.3f);
+                    child.transform.Translate(Vector3.down * 0.1f);
                 }
                 else
                 {
