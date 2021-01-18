@@ -241,8 +241,6 @@ public class ShamanControl : MonoBehaviour
                 {
                     clickPos = hit.point;
 
-                    Debug.Log(hit.collider.gameObject.name);
-
                     // Distance between the point in world space where the player has clicked on and the player itself
                     float dist = Vector3.Distance(transform.position, clickPos);
                     // Checks if the clicked point is in the magic usable area and if itwas a click on te terrain
