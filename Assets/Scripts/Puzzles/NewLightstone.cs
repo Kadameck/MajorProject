@@ -7,6 +7,8 @@ public class NewLightstone : MonoBehaviour
     [SerializeField]
     bool isActiv = false;
     [SerializeField]
+    GameObject symbol;
+    [SerializeField]
     GameObject laserBeamTarget;
 
     private GroveDoorMechanism doorMech;
@@ -22,9 +24,14 @@ public class NewLightstone : MonoBehaviour
         // Wenn der stein bereits von beginn an aktiv sein soll
         if (isActiv)
         {
+            symbol.SetActive(true);
             // im GroveDoorMechanism.cs wird der counter für active steine um eins erhöht
             doorMech.IncreaseActiveLightstoneCounter();
             ChangeLaserBeamVisibility();
+        }
+        else
+        {
+            symbol.SetActive(false);
         }
     }
 
@@ -40,6 +47,7 @@ public class NewLightstone : MonoBehaviour
     private void ChangeLaserBeamVisibility()
     {
         lineRenderer.enabled = isActiv;
+        symbol.SetActive(isActiv);
         ActivateOrDeactivateTarget();
     }
 
