@@ -23,12 +23,16 @@ public class ShamanControl : MonoBehaviour
     Transform hand;
     [SerializeField]
     GameObject carrySphere;
+    [SerializeField, Tooltip("The Speed multiplicators of the playeer")]
+    public float walkSpeed = 500;
 
     [HideInInspector]
     public bool isClimbing = false;
 
-    // The Speed multiplicators of the playeer
-    public float walkSpeed = 500;
+    
+    [Space(15)]
+    [SerializeField]
+    audioCollector[] soundeffects;
 
     // Movement y value
     private float yDirect;
@@ -50,6 +54,11 @@ public class ShamanControl : MonoBehaviour
     {
         // Takes the rigidbody component of the player
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        SoundManager.InitAudio(soundeffects);
     }
 
     // FixedUpdate is called regularly at a fixed interval
@@ -102,6 +111,7 @@ public class ShamanControl : MonoBehaviour
                         // Moves the player normal speed
                         rb.velocity = new Vector3(xMove, yDirect, zMove) * walkSpeed * Time.deltaTime;
                         anim.SetBool("Walk", true);
+                        SoundManager.PlaySound(SoundManager.Sound.Walk);
                     }
                     // Drops the player
                     rb.velocity += new Vector3(0.0f, -1.0f, 0.0f);
