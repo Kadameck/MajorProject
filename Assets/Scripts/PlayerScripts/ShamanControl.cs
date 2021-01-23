@@ -200,10 +200,18 @@ public class ShamanControl : MonoBehaviour
                         // Checks if the clicked spot is a valide one to placing something
                         if (hit.collider.gameObject.CompareTag("Ground"))
                         {
-                            // Put the carried object down and resets all carring variables
-                            currentlyCarriedObject.GetComponent<CarryObject>().PutDown(hit.point);
-                            currentlyCarriedObject = null;
-                            puttDownSomething = true;
+                            try
+                            {
+                                // Put the carried object down and resets all carring variables
+                                currentlyCarriedObject.GetComponent<CarryObject>().PutDown(hit.point);
+                                currentlyCarriedObject = null;
+                                puttDownSomething = true;
+                            }
+                            catch
+                            {
+                                currentlyCarriedObject = null;
+                                puttDownSomething = true;
+                            }
                         }
                     }
                 }
@@ -421,6 +429,11 @@ public class ShamanControl : MonoBehaviour
     public Animator GetAnimator()
     {
         return anim;
+    }
+
+    public bool getUseMagic()
+    {
+        return useMagic;
     }
 
     private IEnumerator LostGroundContact()

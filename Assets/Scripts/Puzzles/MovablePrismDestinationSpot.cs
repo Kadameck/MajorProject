@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class MovablePrismDestinationSpot : MonoBehaviour
 {
+    private ShamanControl player;
+    
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<ShamanControl>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.GetComponent<Prism>() != null)

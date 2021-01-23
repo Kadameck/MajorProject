@@ -7,14 +7,16 @@ using UnityEngine;
 /// </summary>
 public class LightStoneTrigger : MonoBehaviour
 {
+    private ShamanControl player;
     private NewLightstone newLightstoneScript;
-    
+
     /// <summary>
     /// gets the LightStone script
     /// </summary>
     private void Start()
     {
         newLightstoneScript = GetComponent<NewLightstone>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<ShamanControl>();
     }
 
     /// <summary>
@@ -23,7 +25,7 @@ public class LightStoneTrigger : MonoBehaviour
     /// <param name="other"></param>
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("BasicMagic"))
+        if (other.gameObject.CompareTag("BasicMagic") && !player.getUseMagic())
         {
             //ls.ChangeLineActiveState();
             newLightstoneScript.ChangeActivState();
