@@ -224,7 +224,7 @@ public class ShamanControl : MonoBehaviour
     /// </summary>
     public void UseMagic()
     {
-        if(Input.GetMouseButtonDown(1) && useMagic)
+        if((Input.GetMouseButtonDown(1) && useMagic) || GetPushSomething())
         {
             SUAVisualisation.enabled = false;
             useMagic = false;
