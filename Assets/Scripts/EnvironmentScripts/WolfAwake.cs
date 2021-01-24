@@ -8,7 +8,7 @@ public class WolfAwake : MonoBehaviour
     WolfPlayerFirstMeeting wPFM;
     [SerializeField, Tooltip ("Marker für die Position an die sich der Spieler bewegen soll ehe der Wolf aufwacht")]
     Transform playerPos;
-    
+
     private Animator anim;
 
     // Start is called before the first frame update
