@@ -8,6 +8,8 @@ using UnityEngine;
 public class ShamanControl : MonoBehaviour
 {
     [SerializeField]
+    CapsuleCollider playerCollider;
+    [SerializeField]
     CameraBehaviour mainCamera;
     [SerializeField, Tooltip("Character Animator Component")]
     Animator anim;
@@ -48,6 +50,11 @@ public class ShamanControl : MonoBehaviour
     private bool pushingSomething = false;
     private bool grounded;
     private bool controlable = false;
+    
+    private float normalColliderHeight;
+    private Vector3 normalColliderCenter;
+    private float sneakColliderHeight;
+    private Vector3 sneakColliderCenter;
 
     IEnumerator lGC = null;
 
@@ -61,6 +68,12 @@ public class ShamanControl : MonoBehaviour
     private void Start()
     {
         SoundManager.InitAudio(soundeffects);
+
+        normalColliderHeight = playerCollider.height;
+        normalColliderCenter = playerCollider.center;
+
+        sneakColliderHeight = 1.94f;
+        sneakColliderCenter = new Vector3(0, -0.21896f, 0);
     }
 
     // FixedUpdate is called regularly at a fixed interval
@@ -118,25 +131,40 @@ public class ShamanControl : MonoBehaviour
                             currentMagicBall = null;
                             anim.SetBool("Magic", false);
                         }
-                        Sneak();
+                        ChangeSneakState();
                     }
 
                     // Checks if the player should sneak
                     if (isSneaking || pushingSomething)
                     {
-                        Debug.Log("blablabla");
-                        anim.SetBool("Walk", false);
-                        anim.SetBool("Sneak", true);
+                        if(isSneaking && !pushingSomething)
+                        {
+                            anim.SetBool("Walk", false);
+                            anim.SetBool("Sneak", true);
+
+                            playerCollider.height = sneakColliderHeight;
+                            playerCollider.center = sneakColliderCenter;
+                        }
+                        else
+                        {
+                            anim.SetBool("Walk", false);
+                            anim.SetBool("Push", true);
+                        }
+
+
                         // Moves the player in sneak speed
                         rb.velocity = new Vector3(xMove, yDirect, zMove) * sneakSpeed * Time.deltaTime;
                     }
                     else
                     {
-                        Debug.Log("teststst");
                         // Moves the player normal speed
                         rb.velocity = new Vector3(xMove, yDirect, zMove) * walkSpeed * Time.deltaTime;
                         anim.SetBool("Sneak", false);
                         anim.SetBool("Walk", true);
+
+                        playerCollider.height = normalColliderHeight;
+                        playerCollider.center = normalColliderCenter;
+
                         SoundManager.PlaySound(SoundManager.Sound.Walk);
                     }
                     // Drops the player
@@ -270,7 +298,7 @@ public class ShamanControl : MonoBehaviour
                 
                 if(isSneaking)
                 {
-                    Sneak();
+                    ChangeSneakState();
                     anim.SetBool("Sneak", false);
                 }
                 
@@ -313,7 +341,7 @@ public class ShamanControl : MonoBehaviour
             }
         }
         // Checks if the player is doing a rightclick during the basic magic skill is active
-        else if (useMagic &&  Input.GetMouseButtonDown(1) || GetPushSomething() || isClimbing)
+        else if ((useMagic &&  Input.GetMouseButtonDown(1)) || GetPushSomething() || isClimbing)
         {
             // Resets everything to no "magic not active"
             useMagic = false;
@@ -328,9 +356,10 @@ public class ShamanControl : MonoBehaviour
     /// Determines if the player should sneak
     /// </summary>
     /// <returns>Should sneak</returns>
-    public void Sneak()
+    public void ChangeSneakState()
     {
         isSneaking = !isSneaking;
+        anim.SetBool("Sneak", isSneaking);
     }
 
     /// <summary>
@@ -438,6 +467,11 @@ public class ShamanControl : MonoBehaviour
 
         if(pushingSomething)
         {
+            if(isSneaking)
+            {
+                ChangeSneakState();
+            }
+
             anim.SetBool("Push", true);
             anim.SetFloat("StartEndPush", 2.0f);
         }

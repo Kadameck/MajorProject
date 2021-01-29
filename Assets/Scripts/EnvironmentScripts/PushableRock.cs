@@ -16,8 +16,8 @@ public class PushableRock : MonoBehaviour
                 (player.position.z > transform.position.z && Input.GetAxis("Vertical") < 0 && (int)Input.GetAxis("Horizontal") == 0) || // spieler hinter dem Stein und geht nach "unten"
                 (player.position.z < transform.position.z && Input.GetAxis("Vertical") > 0 && (int)Input.GetAxis("Horizontal") == 0)) // Spieler vor dem stein un geht nach "oben"
             {
-                this.GetComponent<Rigidbody>().isKinematic = false;
                 player.gameObject.GetComponent<ShamanControl>().SetPushingSomething();
+                this.GetComponent<Rigidbody>().isKinematic = false;
             }
 
         }
@@ -32,8 +32,8 @@ public class PushableRock : MonoBehaviour
 
             if(player.GetComponent<ShamanControl>().GetPushSomething())
             {
-                this.GetComponent<Rigidbody>().isKinematic = true;
                 player.GetComponent<ShamanControl>().SetPushingSomething();
+                this.GetComponent<Rigidbody>().isKinematic = true;
             }
         }
     }
