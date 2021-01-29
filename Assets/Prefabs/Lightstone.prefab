@@ -128,8 +128,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.036786713, y: 0.03308795, z: 0.020937724}
-  m_Center: {x: -0.00083809707, y: 0.001730769, z: 0.008652463}
+  m_Size: {x: 0.036786713, y: 0.057690464, z: 0.027435023}
+  m_Center: {x: -0.00083809777, y: 0.000090609276, z: 0.009355962}
 --- !u!114 &6250042233413277592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActiv: 0
+  symbols: []
   laserBeamTarget: {fileID: 0}
 --- !u!120 &6250042233413277595
 LineRenderer:
