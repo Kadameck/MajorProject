@@ -16,6 +16,7 @@ public class LevelSountrackManager : MonoBehaviour
     void Start()
     {
         audioSource = this.gameObject.AddComponent<AudioSource>();
+        audioSource.volume = 0.5f;
         audioSource.clip = normalForestSoundtracks[0];
         timer = 0.0f;
         currentPlayingAudioClipLenght = audioSource.clip.length;

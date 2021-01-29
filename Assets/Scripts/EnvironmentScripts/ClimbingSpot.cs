@@ -23,6 +23,7 @@ public class ClimbingSpot : MonoBehaviour
         // Checks if the player is climbing
         if (child != null)
         {
+            child.transform.GetChild(0).GetComponent<Animator>().SetBool("Climb", true);
             // Checks if the correct Key for climbing up or downward is pressed and moves the player that way 
             if (upKey == 'w' && Input.GetKey(KeyCode.W) ||
                upKey == 'd' && Input.GetKey(KeyCode.D) ||
@@ -55,16 +56,28 @@ public class ClimbingSpot : MonoBehaviour
         // Checks whether the object that enters the trigger is the player, whether the player was climbing just short before and whether he is coming from above or below
         if (other.gameObject.CompareTag("Player")&& other.transform.position.y < transform.position.y)
         {
-            // Blocks the normal player movement
-            other.gameObject.GetComponent<ShamanControl>().isClimbing = true;
-            other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            // Prefents the player from falling
-            other.gameObject.GetComponent<Rigidbody>().useGravity = false;
-            // Sets the player as child obj from the climbingSpot
-            other.transform.SetParent(this.transform);
-            // Stores the player to move him in Update()
-            child = other.gameObject;
-            
+            try
+            {
+                GameObject magicBall = FindObjectOfType<BasicMagicBehaviour>().gameObject;
+
+                if (magicBall != null)
+                {
+                    Destroy(magicBall.gameObject);
+                }
+            }
+            catch
+            {
+                // Blocks the normal player movement
+                other.gameObject.GetComponent<ShamanControl>().isClimbing = true;
+                other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                // Prefents the player from falling
+                other.gameObject.GetComponent<Rigidbody>().useGravity = false;
+                // Sets the player as child obj from the climbingSpot
+                other.transform.SetParent(this.transform);
+
+                // Stores the player to move him in Update()
+                child = other.gameObject;
+            }
         }
     }
 
@@ -75,7 +88,7 @@ public class ClimbingSpot : MonoBehaviour
     private void OnCollisionExit(Collision other)
     {
         // Checks if the obj that is leaving the trigger is the player
-        if(other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             SetPlayerFree();
         }
@@ -85,6 +98,7 @@ public class ClimbingSpot : MonoBehaviour
     {
         if (child != null)
         {
+            child.transform.GetChild(0).GetComponent<Animator>().SetBool("Climb", false);
             child.gameObject.GetComponent<ShamanControl>().isClimbing = false;
             child.transform.SetParent(null);
             child.gameObject.GetComponent<Rigidbody>().useGravity = true;

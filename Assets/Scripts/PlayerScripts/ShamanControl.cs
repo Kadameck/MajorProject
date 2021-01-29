@@ -224,7 +224,7 @@ public class ShamanControl : MonoBehaviour
     /// </summary>
     public void UseMagic()
     {
-        if((Input.GetMouseButtonDown(1) && useMagic) || GetPushSomething())
+        if((Input.GetMouseButtonDown(1) && useMagic) || GetPushSomething() || isClimbing)
         {
             SUAVisualisation.enabled = false;
             useMagic = false;
@@ -281,7 +281,7 @@ public class ShamanControl : MonoBehaviour
             }
         }
         // Checks if the player is doing a rightclick during the basic magic skill is active
-        else if (useMagic &&  Input.GetMouseButtonDown(1))
+        else if (useMagic &&  Input.GetMouseButtonDown(1) || GetPushSomething() || isClimbing)
         {
             // Resets everything to no "magic not active"
             useMagic = false;
