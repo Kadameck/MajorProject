@@ -28,8 +28,10 @@ public class ShamanControl : MonoBehaviour
 
     [HideInInspector]
     public bool isClimbing = false;
+    [HideInInspector]
+    public bool isSneaking = false;
 
-    
+
     [Space(15)]
     [SerializeField]
     audioCollector[] soundeffects;
@@ -64,6 +66,12 @@ public class ShamanControl : MonoBehaviour
     // FixedUpdate is called regularly at a fixed interval
     void FixedUpdate()
     {
+        if(isSneaking && isClimbing)
+        {
+            isSneaking = false;
+            anim.SetBool("Sneak", false);
+        }
+
         if (controlable)
         {
             GroundScan();
@@ -100,16 +108,34 @@ public class ShamanControl : MonoBehaviour
                     // Calls the PlayerRotation function
                     PlayerRotation(targetDir);
 
-                    // Checks if the player should sneak
-                    if (Sneak() || pushingSomething)
+                    if (Input.GetKeyDown(KeyCode.LeftControl))
                     {
+                        if (currentMagicBall != null)
+                        {
+                            SUAVisualisation.enabled = false;
+                            useMagic = false;
+                            Destroy(currentMagicBall);
+                            currentMagicBall = null;
+                            anim.SetBool("Magic", false);
+                        }
+                        Sneak();
+                    }
+
+                    // Checks if the player should sneak
+                    if (isSneaking || pushingSomething)
+                    {
+                        Debug.Log("blablabla");
+                        anim.SetBool("Walk", false);
+                        anim.SetBool("Sneak", true);
                         // Moves the player in sneak speed
                         rb.velocity = new Vector3(xMove, yDirect, zMove) * sneakSpeed * Time.deltaTime;
                     }
                     else
                     {
+                        Debug.Log("teststst");
                         // Moves the player normal speed
                         rb.velocity = new Vector3(xMove, yDirect, zMove) * walkSpeed * Time.deltaTime;
+                        anim.SetBool("Sneak", false);
                         anim.SetBool("Walk", true);
                         SoundManager.PlaySound(SoundManager.Sound.Walk);
                     }
@@ -241,7 +267,13 @@ public class ShamanControl : MonoBehaviour
             {
                 // Makes the usable area visualization enabled
                 StartCoroutine(ActivateSkillUseArea());
-
+                
+                if(isSneaking)
+                {
+                    Sneak();
+                    anim.SetBool("Sneak", false);
+                }
+                
                 // Spawns a magic ball effekt and set is a child of the hand of the player
                 currentMagicBall = Instantiate(magicBall, hand.position, Quaternion.identity);
                 currentMagicBall.transform.SetParent(hand);
@@ -296,14 +328,9 @@ public class ShamanControl : MonoBehaviour
     /// Determines if the player should sneak
     /// </summary>
     /// <returns>Should sneak</returns>
-    public bool Sneak()
+    public void Sneak()
     {
-        if(Input.GetKey(KeyCode.LeftShift))
-        {
-            return true;
-        }
-
-        return false;
+        isSneaking = !isSneaking;
     }
 
     /// <summary>

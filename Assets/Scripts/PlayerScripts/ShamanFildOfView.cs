@@ -246,14 +246,14 @@ public class ShamanFildOfView : MonoBehaviour
         RaycastHit rayHit;
 
         // Checks whether the player wants to sneak but his field of view has not yet been reduced
-        if (sControl.Sneak() && viewRadius != normalViewRadius * 0.5f)
+        if (sControl.isSneaking && viewRadius != normalViewRadius * 0.5f)
         {
             // Reduce field of view and the pointlight radius
             viewRadius = normalViewRadius * 0.5f;
             pointLight.range = normalPointLightRange * 0.5f;
         }
         // Checks whether the player wants to walk normally but his field of view is still reduced
-        else if (!sControl.Sneak() && viewRadius != normalViewRadius)
+        else if (!sControl.isSneaking && viewRadius != normalViewRadius)
         {
             // Resets the field of view radius and point light radius to their normal values
             viewRadius = normalViewRadius;

@@ -16,6 +16,7 @@ TagManager:
   - ObstacleTree
   - Pushable
   - Wolf
+  - Body
   layers:
   - Default
   - TransparentFX
