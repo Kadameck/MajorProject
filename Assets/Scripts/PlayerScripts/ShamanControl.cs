@@ -109,6 +109,20 @@ public class ShamanControl : MonoBehaviour
         {
             if(grounded) //GroundScan())
             {
+                // Let the shaman sneak
+                if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.Space))
+                {
+                    if (currentMagicBall != null)
+                    {
+                        SUAVisualisation.enabled = false;
+                        useMagic = false;
+                        Destroy(currentMagicBall);
+                        currentMagicBall = null;
+                        anim.SetBool("Magic", false);
+                    }
+                    ChangeSneakState();
+                }
+
                 if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
                 {
                     // Takes the movement direktion 
@@ -121,19 +135,6 @@ public class ShamanControl : MonoBehaviour
                     // Calls the PlayerRotation function
                     PlayerRotation(targetDir);
 
-                    if (Input.GetKeyDown(KeyCode.LeftControl))
-                    {
-                        if (currentMagicBall != null)
-                        {
-                            SUAVisualisation.enabled = false;
-                            useMagic = false;
-                            Destroy(currentMagicBall);
-                            currentMagicBall = null;
-                            anim.SetBool("Magic", false);
-                        }
-                        ChangeSneakState();
-                    }
-
                     // Checks if the player should sneak
                     if (isSneaking || pushingSomething)
                     {
@@ -141,6 +142,7 @@ public class ShamanControl : MonoBehaviour
                         {
                             anim.SetBool("Walk", false);
                             anim.SetBool("Sneak", true);
+                            anim.SetFloat("SneakAnimSpeed", 1.0f);
 
                             playerCollider.height = sneakColliderHeight;
                             playerCollider.center = sneakColliderCenter;
@@ -173,6 +175,10 @@ public class ShamanControl : MonoBehaviour
                 else
                 {
                     anim.SetBool("Walk", false);
+                    if(isSneaking)
+                    {
+                        anim.SetFloat("SneakAnimSpeed", 0.0f);
+                    }
                 }
             }
             else
@@ -359,6 +365,10 @@ public class ShamanControl : MonoBehaviour
     public void ChangeSneakState()
     {
         isSneaking = !isSneaking;
+        anim.SetBool("Walk", false);
+        anim.SetBool("Climb", false);
+        anim.SetBool("Magic", false);
+        anim.SetBool("Push", false);
         anim.SetBool("Sneak", isSneaking);
     }
 
