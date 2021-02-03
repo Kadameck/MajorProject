@@ -56,7 +56,7 @@ public static class SoundManager
             // Erstellte ein Gameobjekt das als sound quelle dient
             GameObject soundObject = new GameObject();
             AudioSource audioSource = soundObject.AddComponent<AudioSource>();
-            audioSource.volume = 0.05f;
+            audioSource.volume = 0.3f;
             // suche in der audioClip bibliothek nach dem passenden clip und spiele diesen exakt 1 mal ab
             audioSource.PlayOneShot(audioClips[Sound.Walk]);
             // Zerstoert das objekt das als audioquelle gesetzt wurde nachdem der soundeffekt beendet wurde

@@ -16,7 +16,7 @@ public class LevelSountrackManager : MonoBehaviour
     void Start()
     {
         audioSource = this.gameObject.AddComponent<AudioSource>();
-        audioSource.volume = 0.5f;
+        audioSource.volume = .3f;
         audioSource.clip = normalForestSoundtracks[0];
         timer = 0.0f;
         currentPlayingAudioClipLenght = audioSource.clip.length;
@@ -49,7 +49,15 @@ public class LevelSountrackManager : MonoBehaviour
         yield return new WaitForSeconds(randomRepeatTimer);
         // setzt einen pseudo zufälligen der als normalForestSoundtracks festgelegten soundtrack als neuen track zum spielen
         audioSource.clip = normalForestSoundtracks[Random.Range(0, normalForestSoundtracks.Length)];
-
+        
+        if(audioSource.clip == normalForestSoundtracks[1])
+        {
+            audioSource.volume = 1.0f;
+        }
+        else
+        {
+            audioSource.volume = 0.3f;
+        }
         StartCoroutine(PlaySoundtracks());
     }
 }
