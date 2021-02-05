@@ -329,7 +329,7 @@ public class ShamanControl : MonoBehaviour
                     float dist = Vector3.Distance(transform.position, clickPos);
                     // Checks if the clicked point is on the terrain
                     if ((hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("MagicInteractive")) &&
-                        Vector3.Distance(transform.position, hit.point) <= 10)
+                        Vector3.Distance(transform.position, hit.point) <= 10 && Mathf.Abs(hit.point.y - transform.position.y) < 5)
                     {
                         // Starts the basic magic ball behaviour
                         currentMagicBall.GetComponent<BasicMagicBehaviour>().Throw(transform.position, hit.point, dist);
@@ -338,13 +338,15 @@ public class ShamanControl : MonoBehaviour
                         // Resets everything to no "magic not active"
                         useMagic = false;
                         SUAVisualisation.enabled = false;
+                        SUAVisualisation.GetComponent<BasicMagicTargetEffect>().targetIsNotGroundOrRightHight = false;
                         canUsebasicMagic = false;
                         anim.SetBool("Magic", false);
 
                         // Starts a magic usable cooldown
                         StartCoroutine(BasicMagicCooldown());
                     }
-                    else if(hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("MagicInteractive"))
+                    else if((hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("MagicInteractive")) &&
+                            Mathf.Abs(hit.point.y - transform.position.y) < 5)
                     {
                         Vector3 impactPoint = transform.position + (hit.point - transform.position).normalized * 10;
                         // Starts the basic magic ball behaviour
