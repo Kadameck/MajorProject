@@ -19,13 +19,13 @@ public class LevelSountrackManager : MonoBehaviour
         audioSource.volume = .3f;
         audioSource.clip = normalForestSoundtracks[0];
         timer = 0.0f;
-        currentPlayingAudioClipLenght = audioSource.clip.length;
 
         StartCoroutine(PlaySoundtracks());
     }
 
     private IEnumerator PlaySoundtracks()
     {
+        currentPlayingAudioClipLenght = audioSource.clip.length;
         // Startet das abspielen
         audioSource.Play();
         // pausiert den code bis der track durch ist
