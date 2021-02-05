@@ -13,7 +13,6 @@ public class PauseParticleSystem : MonoBehaviour
     void Start()
     {
         StartCoroutine(PauseTimer());
-        system.Pause();
     }
 
     private IEnumerator PauseTimer()
