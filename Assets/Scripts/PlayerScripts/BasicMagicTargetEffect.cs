@@ -25,9 +25,14 @@ public class BasicMagicTargetEffect : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("MagicInteractive"))
+                if ((hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("MagicInteractive")) &&
+                    Vector3.Distance(hit.point, player.position) <= 10)
                 {
                     transform.position = hit.point;
+                }
+                else if (hit.collider.gameObject.CompareTag("Ground") || hit.collider.gameObject.CompareTag("MagicInteractive"))
+                {
+                    transform.position = player.position + (hit.point - player.position).normalized * 10;
                 }
             }
         }

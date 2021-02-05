@@ -45,19 +45,11 @@ public class LevelSountrackManager : MonoBehaviour
         audioSource.clip = null;
         timer = 0.0f;
         // erstellt eine pseudo zufällige zeit, in der kein soundtrack gespielt wird
-        float randomRepeatTimer = Random.Range(0, 61);
+        float randomRepeatTimer = Random.Range(0, 31);
         yield return new WaitForSeconds(randomRepeatTimer);
         // setzt einen pseudo zufälligen der als normalForestSoundtracks festgelegten soundtrack als neuen track zum spielen
         audioSource.clip = normalForestSoundtracks[Random.Range(0, normalForestSoundtracks.Length)];
         
-        if(audioSource.clip == normalForestSoundtracks[1])
-        {
-            audioSource.volume = 1.0f;
-        }
-        else
-        {
-            audioSource.volume = 0.3f;
-        }
         StartCoroutine(PlaySoundtracks());
     }
 }
