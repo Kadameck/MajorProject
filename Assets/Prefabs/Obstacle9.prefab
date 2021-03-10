@@ -218,6 +218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlantFlowerS8_1
       objectReference: {fileID: 0}
+    - target: {fileID: 1314212990602278, guid: 20c99948d55e66b4f8945f9c1bc9c204, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4852751478127430, guid: 20c99948d55e66b4f8945f9c1bc9c204, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.499571
@@ -287,6 +291,10 @@ PrefabInstance:
     - target: {fileID: 1122585905030526, guid: 900850a80631f5046996494bf724abc5, type: 3}
       propertyPath: m_Name
       value: PlantFlower5_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1122585905030526, guid: 900850a80631f5046996494bf724abc5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4186730911169010, guid: 900850a80631f5046996494bf724abc5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -410,6 +418,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AN_Rock_3_Cov
       objectReference: {fileID: 0}
+    - target: {fileID: 2638098956592556692, guid: 50f3c03dbfedb5143b333d7f836ea75d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50f3c03dbfedb5143b333d7f836ea75d, type: 3}
 --- !u!4 &1122075963065364719 stripped
@@ -427,6 +439,10 @@ PrefabInstance:
     - target: {fileID: 1014207076201164, guid: f591995298316074fa78193899d54e6a, type: 3}
       propertyPath: m_Name
       value: PlantFlower5_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1014207076201164, guid: f591995298316074fa78193899d54e6a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4985180211153218, guid: f591995298316074fa78193899d54e6a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -550,6 +566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AN_Grass_1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2863184830341695614, guid: 163a834aa7eb225438cf1cc2bf8540b1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 163a834aa7eb225438cf1cc2bf8540b1, type: 3}
 --- !u!4 &3654992638464059573 stripped
@@ -567,6 +587,10 @@ PrefabInstance:
     - target: {fileID: 1870777847080720, guid: e44fd86764cdb5b48b5feefcc75add91, type: 3}
       propertyPath: m_Name
       value: PlantFlower3_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1870777847080720, guid: e44fd86764cdb5b48b5feefcc75add91, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4091070546530404, guid: e44fd86764cdb5b48b5feefcc75add91, type: 3}
       propertyPath: m_LocalPosition.x
@@ -638,6 +662,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlantFlower3_3
       objectReference: {fileID: 0}
+    - target: {fileID: 1461028220388332, guid: 1d7eb16be07ed8946aa8c12f2b853298, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4149413008726650, guid: 1d7eb16be07ed8946aa8c12f2b853298, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.50648767
@@ -707,6 +735,10 @@ PrefabInstance:
     - target: {fileID: 1818241545795652, guid: 5bcf67c2b61c93e498bf68b351841c05, type: 3}
       propertyPath: m_Name
       value: PlantFlower3_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818241545795652, guid: 5bcf67c2b61c93e498bf68b351841c05, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4338709165003474, guid: 5bcf67c2b61c93e498bf68b351841c05, type: 3}
       propertyPath: m_LocalPosition.x
@@ -830,6 +862,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AN_Grass_1
       objectReference: {fileID: 0}
+    - target: {fileID: 2863184830341695614, guid: 163a834aa7eb225438cf1cc2bf8540b1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 163a834aa7eb225438cf1cc2bf8540b1, type: 3}
 --- !u!4 &6289421218948059444 stripped
@@ -847,6 +883,10 @@ PrefabInstance:
     - target: {fileID: 6772570215700389274, guid: 0aa5afe4e5b9c18498b977f4dd657743, type: 3}
       propertyPath: m_Name
       value: AN_Reeds
+      objectReference: {fileID: 0}
+    - target: {fileID: 6772570215700389274, guid: 0aa5afe4e5b9c18498b977f4dd657743, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7756985687456395145, guid: 0aa5afe4e5b9c18498b977f4dd657743, type: 3}
       propertyPath: m_LocalPosition.x
@@ -918,6 +958,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AN_Dead_Bush
       objectReference: {fileID: 0}
+    - target: {fileID: 6041328239126204732, guid: bc5c481d3a398cb4e8fec578a74e4039, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7317300317026100015, guid: bc5c481d3a398cb4e8fec578a74e4039, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.044537075
@@ -987,6 +1031,10 @@ PrefabInstance:
     - target: {fileID: 1436937709412790, guid: 163c2e9c9d008dc4680ae5d381d449c6, type: 3}
       propertyPath: m_Name
       value: PlantFlower6_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1436937709412790, guid: 163c2e9c9d008dc4680ae5d381d449c6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4425580598665810, guid: 163c2e9c9d008dc4680ae5d381d449c6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1058,6 +1106,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlantFlower6_4
       objectReference: {fileID: 0}
+    - target: {fileID: 1003058076019986, guid: e4f7cc5659c740a4c9ac382c2e611eaa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4593381896402776, guid: e4f7cc5659c740a4c9ac382c2e611eaa, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.71225196
@@ -1127,6 +1179,10 @@ PrefabInstance:
     - target: {fileID: 1558971186712296, guid: fa973f50876ef3e46baba3abd5c98ff6, type: 3}
       propertyPath: m_Name
       value: PlantFlower6_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558971186712296, guid: fa973f50876ef3e46baba3abd5c98ff6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4909962151835038, guid: fa973f50876ef3e46baba3abd5c98ff6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1198,6 +1254,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlantFlower4_1
       objectReference: {fileID: 0}
+    - target: {fileID: 1747031374522076, guid: b6eebd9afe988f541829059f1f6981a8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4824093898160918, guid: b6eebd9afe988f541829059f1f6981a8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.13026431
@@ -1267,6 +1327,10 @@ PrefabInstance:
     - target: {fileID: 1929028307725204, guid: cc553db6dcd78354982500ed9b1a4ced, type: 3}
       propertyPath: m_Name
       value: PlantFlower4_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929028307725204, guid: cc553db6dcd78354982500ed9b1a4ced, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4903152224359676, guid: cc553db6dcd78354982500ed9b1a4ced, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1338,6 +1402,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlantFlower5_6 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1014207076201164, guid: f591995298316074fa78193899d54e6a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4985180211153218, guid: f591995298316074fa78193899d54e6a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.3733999
@@ -1407,6 +1475,10 @@ PrefabInstance:
     - target: {fileID: 1870777847080720, guid: e44fd86764cdb5b48b5feefcc75add91, type: 3}
       propertyPath: m_Name
       value: PlantFlower3_5 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1870777847080720, guid: e44fd86764cdb5b48b5feefcc75add91, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4091070546530404, guid: e44fd86764cdb5b48b5feefcc75add91, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1478,6 +1550,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlantFlower1_3
       objectReference: {fileID: 0}
+    - target: {fileID: 1202663307893854, guid: 983d4e8ce7f566c4589dfba91c4e314a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4779027783181120, guid: 983d4e8ce7f566c4589dfba91c4e314a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.43642294
@@ -1548,6 +1624,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlantFlower2_2
       objectReference: {fileID: 0}
+    - target: {fileID: 1159569744436300, guid: cefdc373d864c1043bb1cf78ffe70ff5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4799367424378262, guid: cefdc373d864c1043bb1cf78ffe70ff5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.9454801
@@ -1617,6 +1697,10 @@ PrefabInstance:
     - target: {fileID: 1986847826233112, guid: f0e8d3613ac82854b9c8779ded785914, type: 3}
       propertyPath: m_Name
       value: PlantFlower5_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986847826233112, guid: f0e8d3613ac82854b9c8779ded785914, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4440903681174930, guid: f0e8d3613ac82854b9c8779ded785914, type: 3}
       propertyPath: m_LocalPosition.x

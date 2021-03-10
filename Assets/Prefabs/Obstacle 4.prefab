@@ -208,6 +208,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2638098956592556692, guid: 50f3c03dbfedb5143b333d7f836ea75d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7848758697074569136, guid: 50f3c03dbfedb5143b333d7f836ea75d, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -265,6 +269,10 @@ PrefabInstance:
     - target: {fileID: 6041328239126204732, guid: bc5c481d3a398cb4e8fec578a74e4039, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041328239126204732, guid: bc5c481d3a398cb4e8fec578a74e4039, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7317300317026100015, guid: bc5c481d3a398cb4e8fec578a74e4039, type: 3}
       propertyPath: m_LocalPosition.x
@@ -327,6 +335,10 @@ PrefabInstance:
     - target: {fileID: 1202663307893854, guid: 983d4e8ce7f566c4589dfba91c4e314a, type: 3}
       propertyPath: m_Name
       value: PlantFlower1_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202663307893854, guid: 983d4e8ce7f566c4589dfba91c4e314a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4779027783181120, guid: 983d4e8ce7f566c4589dfba91c4e314a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -438,6 +450,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2638098956592556692, guid: 50f3c03dbfedb5143b333d7f836ea75d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7848758697074569136, guid: 50f3c03dbfedb5143b333d7f836ea75d, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -463,6 +479,10 @@ PrefabInstance:
     - target: {fileID: 1929028307725204, guid: cc553db6dcd78354982500ed9b1a4ced, type: 3}
       propertyPath: m_Name
       value: PlantFlower4_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929028307725204, guid: cc553db6dcd78354982500ed9b1a4ced, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4903152224359676, guid: cc553db6dcd78354982500ed9b1a4ced, type: 3}
       propertyPath: m_LocalPosition.x
@@ -582,6 +602,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7411338079306338954, guid: 27544902da1189444a3b7eb4c0a96acd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27544902da1189444a3b7eb4c0a96acd, type: 3}
 --- !u!4 &3151446107887397887 stripped
@@ -651,6 +675,10 @@ PrefabInstance:
     - target: {fileID: 4276581488286876975, guid: ba76f0562dc2eac41970e644533beab9, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4276581488286876975, guid: ba76f0562dc2eac41970e644533beab9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7406311610159108969, guid: ba76f0562dc2eac41970e644533beab9, type: 3}
       propertyPath: m_StaticEditorFlags
